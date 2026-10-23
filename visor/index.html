@@ -1,0 +1,543 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rutas de Cajas Deadlock</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Marcellus&family=Marcellus+SC&display=swap">
+<style>
+  /* Bordes: Kenney "Fantasy UI Borders" (CC0), teñidos con generar_ui.py */
+  :root {
+    --bg: #0e1111; --panel: #181c1c; --borde: #2c3333; --texto: #e9e4d6; --tenue: #9a9585;
+    --oro: #d4b06a; --oro-claro: #f5d68c;
+    --acento: #d4b06a; --sma: #c6f24e; --voraz: #ff8a3d;
+    --superficie: #ff3b30; --subterraneo: #1e96ff; --azotea: #b04ad0;
+    /* estética art déco/ocultista del juego: Cinzel Decorative para títulos, Marcellus para el resto */
+    --display: "Cinzel Decorative", Georgia, serif;
+    --titulo: "Marcellus SC", Georgia, serif;
+    --cuerpo: "Marcellus", Georgia, serif;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; color: var(--texto); font: 15px/1.45 var(--cuerpo);
+    background: radial-gradient(ellipse at 50% 0%, #1c2222 0%, var(--bg) 60%) fixed, var(--bg);
+  }
+  header { position: relative; padding: 18px 20px 6px; display: flex; flex-direction: column; align-items: center; gap: 2px; text-align: center; }
+  header h1 { font: 900 34px/1.2 var(--display); text-shadow: 0 0 18px #d4b06a55; margin: 0; color: var(--oro-claro); letter-spacing: .08em; }
+  .subtitulo { margin: 0; font: 400 17px var(--titulo); color: var(--oro); letter-spacing: .08em; }
+  .idioma { position: absolute; top: 12px; right: 16px; display: flex; gap: 4px; }
+  .idioma button { padding: 1px 6px; font-size: 13px; }
+  @media (max-width: 600px) { .idioma { position: static; align-self: flex-end; } }
+  .devs a { color: inherit; text-decoration: none; border-bottom: 1px solid transparent; transition: color .15s, border-color .15s; }
+  .devs a:hover, .devs a:focus-visible { color: #fff; border-bottom-color: var(--oro); }
+  header span { color: var(--tenue); }
+  .titulo-deco { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; }
+  .titulo-deco::before, .titulo-deco::after {
+    content: ""; flex: 0 1 192px; height: 44px; background: url(assets/ui/divisor.png) right center / contain no-repeat;
+    image-rendering: pixelated;
+  }
+  .titulo-deco::before { background-image: url(assets/ui/divisor.png); }
+  .titulo-deco::after { background-image: url(assets/ui/divisor-izq.png); background-position: left center; }
+  main { display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: 16px; padding: 16px; }
+  @media (max-width: 900px) { main { grid-template-columns: 1fr; } }
+  .mapa {
+    align-self: start; position: relative; background: #0b0d0d padding-box;
+    border: 28px solid transparent; border-image: url(assets/ui/marco.png) 28 / 28px stretch;
+    image-rendering: pixelated;
+  }
+  canvas#lienzo { width: 100%; height: auto; display: block; cursor: crosshair; image-rendering: auto; }
+  #tip { position: absolute; pointer-events: none; background: #000d; border: 1px solid var(--oro); color: var(--texto); padding: 4px 8px; font-size: 12px; display: none; white-space: nowrap; }
+  aside { display: flex; flex-direction: column; gap: 14px; }
+  .card {
+    padding: 14px 18px 16px;
+    border: 24px solid transparent; border-image: url(assets/ui/card.png) 24 fill / 24px stretch;
+    image-rendering: pixelated;
+  }
+  .card > * { margin-inline: -6px; }
+  .card h2 {
+    display: flex; align-items: center; gap: 8px; justify-content: center;
+    font: 400 15px/1 var(--titulo); letter-spacing: .14em; color: var(--oro); margin: -10px -6px 10px;
+  }
+  .card h2::before, .card h2::after {
+    content: ""; flex: 1; height: 22px; image-rendering: pixelated;
+    background: url(assets/ui/linea.png) right center / auto 22px no-repeat;
+  }
+  .card h2::after { background-image: url(assets/ui/linea-izq.png); background-position: left center; }
+  .fila { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin: 6px 0; }
+  label { display: inline-flex; gap: 5px; align-items: center; cursor: pointer; }
+  select, button {
+    color: var(--texto); font: inherit; cursor: pointer; padding: 3px 8px; background: none;
+    border: 8px solid transparent; border-image: url(assets/ui/boton.png) 10 fill / 8px stretch;
+    image-rendering: pixelated;
+  }
+  select option { background: var(--panel); }
+  button { font: 400 14px/1.2 var(--titulo); letter-spacing: .06em; }
+  button:hover, select:hover { border-image-source: url(assets/ui/boton-hover.png); }
+  button.on { border-image-source: url(assets/ui/boton-on.png); color: #1a1408; }
+  input[type=range] { width: 100%; accent-color: var(--oro); }
+  input[type=checkbox] { accent-color: var(--oro); }
+  .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .stat {
+    padding: 2px 4px; border: 18px solid transparent;
+    border-image: url(assets/ui/stat.png) 24 fill / 18px stretch; image-rendering: pixelated;
+  }
+  .stat > * { margin-inline: -8px; }
+  .stat b { display: block; font: 400 26px/1.2 var(--titulo); color: var(--oro-claro); font-variant-numeric: tabular-nums; }
+  .stat small { color: var(--tenue); }
+  .delta { color: var(--acento); }
+  canvas#conv { width: 100%; height: 150px; display: block; }
+  .ley { display: flex; flex-wrap: wrap; gap: 10px; font-size: 12px; color: var(--tenue); }
+  .ley i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 4px; vertical-align: -1px; }
+  footer { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 0 16px 24px; }
+  @media (max-width: 900px) { footer { grid-template-columns: 1fr; } }
+  .devs { list-style: none; padding: 0; margin: 4px 0 0; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; }
+  .devs li { font: 700 18px/1.2 var(--display); color: var(--oro-claro); }
+  .devs small { display: block; font: 13px var(--cuerpo); color: var(--tenue); letter-spacing: .04em; margin-top: 2px; }
+  .gracias p { margin: 0 0 10px; text-align: center; }
+  .gracias p:last-child { margin-bottom: 0; }
+  /* Marcellus respeta mayúsculas/minúsculas: el usuario de Reddit debe verse exacto */
+  .gracias b { font: 400 20px var(--cuerpo); color: var(--oro-claro); letter-spacing: .03em; }
+  .gracias a { color: inherit; text-decoration: none; border-bottom: 1px dotted var(--oro); }
+  .gracias a:hover { color: var(--oro-claro); }
+  .gracias span { display: block; color: var(--tenue); font-size: 13px; }
+  .pie { text-align: center; color: var(--tenue); font: 13px var(--titulo); letter-spacing: .08em; margin-top: 12px; }
+  #error { padding: 40px; color: var(--voraz); }
+  code { background: #0006; padding: 1px 5px; border-radius: 4px; }
+</style>
+</head>
+<body>
+<header>
+  <div class="idioma" role="group" aria-label="Idioma / Language">
+    <button data-lang="es">ES</button><button data-lang="en">EN</button>
+  </div>
+  <div class="titulo-deco"><h1>SoulPath</h1></div>
+  <p class="subtitulo" data-i18n="subtitulo"></p>
+  <span>Slime Mould Algorithm · Orienteering Problem</span>
+</header>
+<div id="error" hidden data-i18n-html="error"></div>
+<main id="app" hidden>
+  <div class="mapa">
+    <canvas id="lienzo" width="1000" height="1000"></canvas>
+    <div id="tip"></div>
+  </div>
+  <aside>
+    <div class="card">
+      <h2 data-i18n="corrida"></h2>
+      <div class="fila">
+        <label>t<sub>max</sub> <select id="selCorrida"></select></label>
+        <label><span data-i18n="fondo"></span> <select id="selFondo">
+          <option value="todos" data-i18n="capasTodas"></option>
+          <option value="superficie" data-i18n="capasSuperficie"></option>
+          <option value="subterraneo" data-i18n="capasSubterraneo"></option>
+          <option value="rooftop" data-i18n="capasAzoteas"></option>
+        </select></label>
+      </div>
+      <div class="fila">
+        <button id="btnSma" class="on" data-i18n="rutaSma"></button>
+        <button id="btnVoraz" data-i18n="rutaVoraz"></button>
+        <label><input type="checkbox" id="chkTodos" checked> <span data-i18n="verTodas"></span></label>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2 data-i18n="resultado"></h2>
+      <div class="stats">
+        <div class="stat"><small data-i18n="almas"></small><b id="sAlmas">–</b><small id="sDelta"></small></div>
+        <div class="stat"><small data-i18n="cajasVisitadas"></small><b id="sCajas">–</b><small id="sMix"></small></div>
+        <div class="stat"><small data-i18n="tiempoRuta"></small><b id="sTiempo">–</b><small id="sTmax"></small></div>
+        <div class="stat"><small data-i18n="vorazBase"></small><b id="sVoraz">–</b><small id="sVorazC"></small></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2 data-i18n="convergencia"></h2>
+      <canvas id="conv" width="680" height="300"></canvas>
+      <div class="fila">
+        <button id="btnPlay"></button>
+        <span id="sIter" style="color:var(--tenue)"></span>
+      </div>
+      <input type="range" id="rngIter" min="0" max="0" value="0">
+      <div class="ley">
+        <span><i style="background:var(--sma)"></i><span data-i18n="mejorGlobal"></span></span>
+        <span><i style="background:#6b7a76"></i><span data-i18n="mediaPoblacion"></span></span>
+        <span><i style="background:var(--voraz)"></i><span data-i18n="voraz"></span></span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2 data-i18n="leyenda"></h2>
+      <div class="ley">
+        <span><i style="background:var(--superficie)"></i><span data-i18n="capa_superficie"></span></span>
+        <span><i style="background:var(--subterraneo)"></i><span data-i18n="capa_subterraneo"></span></span>
+        <span><i style="background:var(--azotea)"></i><span data-i18n="capa_azotea"></span></span>
+        <span data-i18n="formas"></span>
+      </div>
+      <p style="color:var(--tenue);font-size:12px;margin:8px 0 0" data-i18n="notaRuta"></p>
+    </div>
+  </aside>
+</main>
+
+<footer>
+  <section class="card">
+    <h2 data-i18n="desarrollado"></h2>
+    <ul class="devs">
+      <li><a href="https://www.linkedin.com/in/fernanda-%C3%A1lvarez-ba23202a0/" target="_blank" rel="noopener">María Fernanda Barrón Álvarez</a></li>
+      <li><a href="https://www.linkedin.com/in/bistraw/" target="_blank" rel="noopener">Leslie Miroslava Benítez Marín</a></li>
+      <li><a href="https://www.linkedin.com/in/merinogale/" target="_blank" rel="noopener">Leonardo Merino Garfias</a></li>
+    </ul>
+    <p class="pie" data-i18n-html="pie"></p>
+  </section>
+  <section class="card gracias">
+    <h2 data-i18n="agradecimientos"></h2>
+    <p>
+      <b><a href="https://www.reddit.com/user/Awsmminer/" target="_blank" rel="noopener">u/Awsmminer</a></b>
+      <span data-i18n="graciasAwsm"></span>
+    </p>
+    <p>
+      <b><a href="https://kenney.nl/assets/fantasy-ui-borders" target="_blank" rel="noopener">Kenney</a></b>
+      <span data-i18n-html="graciasKenney"></span>
+    </p>
+  </section>
+</footer>
+
+<script>
+// Textos de la interfaz. Idioma: ?lang=es|en, luego el guardado, luego el del navegador.
+const TEXTOS = {
+  es: {
+    tituloPagina: "SoulPath · Rutas de cajas en Deadlock",
+    subtitulo: "Rutas de recolección de cajas en Deadlock",
+    error: "No se encontró <code>resultados.js</code>. Corre primero <code>python sma_deadlock.py</code>.",
+    corrida: "Corrida", fondo: "Fondo",
+    capasTodas: "Todas las capas", capasSuperficie: "Superficie", capasSubterraneo: "Subterráneo", capasAzoteas: "Azoteas",
+    capa_superficie: "superficie", capa_subterraneo: "subterráneo", capa_azotea: "azotea",
+    tipo_caja: "caja", tipo_urna: "urna",
+    deco_estricto: "estricto", deco_salto: "salto", deco_insercion: "inserción", deco_guiado: "guiado",
+    rutaSma: "Ruta SMA", rutaVoraz: "Ruta voraz", verTodas: "ver todas las cajas",
+    resultado: "Resultado", almas: "Almas", cajasVisitadas: "Cajas visitadas", tiempoRuta: "Tiempo de ruta",
+    vorazBase: "Voraz (base)", vsVoraz: "vs voraz", lineaBase: "línea base",
+    mezcla: "{c} cajas · {u} urnas", limite: "límite {t} s", nCajas: "{n} cajas",
+    iteracion: "iteración {i} / {n}", reps: " · {n} reps, media {m}",
+    convergencia: "Convergencia del SMA", reproducir: "▶ Reproducir", pausa: "⏸ Pausa",
+    mejorGlobal: "mejor global", mediaPoblacion: "media de la población", voraz: "voraz",
+    leyenda: "Leyenda", formas: "■ caja · ● urna",
+    notaRuta: "El número sobre cada caja es el orden de visita. La ruta sale y regresa al punto de inicio ◆.",
+    visita: "visita {n}", inicio: "Base (inicio)",
+    desarrollado: "Desarrollado por",
+    pie: "Ingeniería en Computación Inteligente · UAA<br>Paralelización de Algoritmos · Prof. Julio César Ponce Gallegos",
+    agradecimientos: "Agradecimientos",
+    graciasAwsm: "por mapear a mano cada caja y urna del mapa, en superficie, subterráneo y azoteas. Sin su trabajo este proyecto no tendría datos.",
+    graciasKenney: "por los bordes y divisores <i>Fantasy UI Borders</i> (CC0) que visten esta interfaz.",
+  },
+  en: {
+    tituloPagina: "SoulPath · Deadlock Crate Routes",
+    subtitulo: "Crate-farming routes for Deadlock",
+    error: "<code>resultados.js</code> not found. Run <code>python sma_deadlock.py</code> first.",
+    corrida: "Run", fondo: "Map",
+    capasTodas: "All layers", capasSuperficie: "Overground", capasSubterraneo: "Underground", capasAzoteas: "Rooftops",
+    capa_superficie: "overground", capa_subterraneo: "underground", capa_azotea: "rooftop",
+    tipo_caja: "box", tipo_urna: "urn",
+    deco_estricto: "strict", deco_salto: "skip", deco_insercion: "insertion", deco_guiado: "guided",
+    rutaSma: "SMA route", rutaVoraz: "Greedy route", verTodas: "show all boxes",
+    resultado: "Result", almas: "Souls", cajasVisitadas: "Boxes visited", tiempoRuta: "Route time",
+    vorazBase: "Greedy (baseline)", vsVoraz: "vs greedy", lineaBase: "baseline",
+    mezcla: "{c} boxes · {u} urns", limite: "limit {t} s", nCajas: "{n} boxes",
+    iteracion: "iteration {i} / {n}", reps: " · {n} runs, mean {m}",
+    convergencia: "SMA convergence", reproducir: "▶ Play", pausa: "⏸ Pause",
+    mejorGlobal: "global best", mediaPoblacion: "population mean", voraz: "greedy",
+    leyenda: "Legend", formas: "■ box · ● urn",
+    notaRuta: "The number above each box is its visit order. The route starts and ends at the start point ◆.",
+    visita: "stop {n}", inicio: "Base (start)",
+    desarrollado: "Developed by",
+    pie: "Intelligent Computing Engineering · UAA<br>Parallel Algorithms · Prof. Julio César Ponce Gallegos",
+    agradecimientos: "Acknowledgements",
+    graciasAwsm: "for hand-mapping every box and urn on the map: overground, underground and rooftops. Without their work this project would have no data.",
+    graciasKenney: "for the <i>Fantasy UI Borders</i> pack (CC0) that dresses this interface.",
+  },
+};
+let idioma = "es";
+const t = (clave, vars = {}) => (TEXTOS[idioma][clave] ?? clave).replace(/\{(\w+)\}/g, (_, k) => vars[k]);
+
+function aplicarIdioma(lang) {
+  idioma = TEXTOS[lang] ? lang : "es";
+  document.documentElement.lang = idioma;
+  document.title = t("tituloPagina");
+  document.querySelectorAll("[data-i18n]").forEach(el => el.textContent = t(el.dataset.i18n));
+  document.querySelectorAll("[data-i18n-html]").forEach(el => el.innerHTML = t(el.dataset.i18nHtml));
+  document.querySelectorAll(".idioma button").forEach(b => b.classList.toggle("on", b.dataset.lang === idioma));
+  try { localStorage.setItem("soulpath-idioma", idioma); } catch (e) {}
+  document.dispatchEvent(new Event("idioma"));
+}
+
+document.querySelectorAll(".idioma button").forEach(b => b.onclick = () => aplicarIdioma(b.dataset.lang));
+{
+  let guardado = null;
+  try { guardado = localStorage.getItem("soulpath-idioma"); } catch (e) {}
+  const param = new URLSearchParams(location.search).get("lang");
+  aplicarIdioma(param || guardado || (navigator.language.startsWith("es") ? "es" : "en"));
+}
+</script>
+
+<script src="resultados.js"></script>
+<script>
+(() => {
+  const R = window.RESULTADOS;
+  if (!R) { document.getElementById("error").hidden = false; return; }
+  document.getElementById("app").hidden = false;
+
+  const css = getComputedStyle(document.documentElement);
+  const COLOR_CAPA = {
+    superficie: css.getPropertyValue("--superficie").trim(),
+    subterraneo: css.getPropertyValue("--subterraneo").trim(),
+    azotea: css.getPropertyValue("--azotea").trim(),
+  };
+  const C_SMA = css.getPropertyValue("--sma").trim();
+  const C_VORAZ = css.getPropertyValue("--voraz").trim();
+
+  const $ = id => document.getElementById(id);
+  const lienzo = $("lienzo"), ctx = lienzo.getContext("2d");
+  const conv = $("conv"), cctx = conv.getContext("2d");
+  const W = lienzo.width, H = lienzo.height;
+
+  const nodos = [{ idx: 0, x: R.inicio.x, y: R.inicio.y, tipo: "inicio", capa: "superficie" }, ...R.nodos];
+  const estado = { corrida: 0, modo: "sma", iter: 0, play: null, progreso: 1, anim: null };
+  const fondos = {};
+  for (const f of ["todos", "superficie", "subterraneo", "rooftop"]) {
+    const im = new Image();
+    im.src = `../mapas/${f}.webp`;
+    im.onload = dibujar;
+    fondos[f] = im;
+  }
+
+  R.corridas.forEach((c, i) => {
+    const o = document.createElement("option");
+    o.value = i; o.dataset.tmax = c.tmax; o.dataset.deco = c.decodificador;
+    $("selCorrida").appendChild(o);
+  });
+
+  const corrida = () => R.corridas[estado.corrida];
+  const px = n => [n.x * W, n.y * H];
+
+  // ruta vigente en la iteración seleccionada (última mejora con iter <= estado.iter)
+  function rutaActual() {
+    const c = corrida();
+    if (estado.modo === "voraz") return c.voraz;
+    let m = c.sma.mejoras[0];
+    for (const x of c.sma.mejoras) if (x.iter <= estado.iter) m = x;
+    return m;
+  }
+
+  function forma(n, r) {
+    if (n.tipo === "urna") { ctx.beginPath(); ctx.arc(0, 0, r, 0, Math.PI * 2); }
+    else { ctx.beginPath(); ctx.rect(-r, -r, 2 * r, 2 * r); }
+  }
+
+  function dibujar() {
+    ctx.clearRect(0, 0, W, H);
+    const fondo = fondos[$("selFondo").value];
+    if (fondo.complete && fondo.naturalWidth) {
+      ctx.drawImage(fondo, 0, 0, W, H);
+      ctx.fillStyle = "rgba(10,12,12,0.45)";
+      ctx.fillRect(0, 0, W, H);
+    }
+    const ruta = rutaActual();
+    const enRuta = new Set(ruta.ruta);
+
+    if ($("chkTodos").checked) {
+      for (const n of R.nodos) {
+        if (enRuta.has(n.idx)) continue;
+        const [x, y] = px(n);
+        ctx.save(); ctx.translate(x, y); ctx.globalAlpha = 0.45;
+        ctx.fillStyle = COLOR_CAPA[n.capa]; forma(n, 3); ctx.fill(); ctx.restore();
+      }
+    }
+
+    // trayecto: inicio -> ruta -> inicio, dibujado hasta "progreso" (animación)
+    const sec = [0, ...ruta.ruta];
+    if (R.config.regresar_al_inicio) sec.push(0);
+    const puntos = sec.map(i => px(nodos[i]));
+    const largos = [0];
+    for (let i = 1; i < puntos.length; i++)
+      largos.push(largos[i - 1] + Math.hypot(puntos[i][0] - puntos[i - 1][0], puntos[i][1] - puntos[i - 1][1]));
+    const limite = largos[largos.length - 1] * estado.progreso;
+    const color = estado.modo === "sma" ? C_SMA : C_VORAZ;
+
+    ctx.lineCap = "round"; ctx.lineJoin = "round";
+    for (const [ancho, alfa] of [[9, 0.18], [3, 1]]) {
+      ctx.strokeStyle = color; ctx.globalAlpha = alfa; ctx.lineWidth = ancho;
+      ctx.beginPath(); ctx.moveTo(...puntos[0]);
+      for (let i = 1; i < puntos.length; i++) {
+        if (largos[i] <= limite) { ctx.lineTo(...puntos[i]); continue; }
+        const f = (limite - largos[i - 1]) / (largos[i] - largos[i - 1]);
+        ctx.lineTo(puntos[i - 1][0] + f * (puntos[i][0] - puntos[i - 1][0]), puntos[i - 1][1] + f * (puntos[i][1] - puntos[i - 1][1]));
+        break;
+      }
+      ctx.stroke();
+    }
+    ctx.globalAlpha = 1;
+
+    // flechas de dirección en el punto medio de cada tramo
+    ctx.fillStyle = color;
+    for (let i = 1; i < puntos.length; i++) {
+      if (largos[i] > limite) break;
+      const [x0, y0] = puntos[i - 1], [x1, y1] = puntos[i];
+      if (Math.hypot(x1 - x0, y1 - y0) < 28) continue;
+      const a = Math.atan2(y1 - y0, x1 - x0);
+      ctx.save(); ctx.translate((x0 + x1) / 2, (y0 + y1) / 2); ctx.rotate(a);
+      ctx.beginPath(); ctx.moveTo(6, 0); ctx.lineTo(-4, -5); ctx.lineTo(-4, 5); ctx.closePath(); ctx.fill();
+      ctx.restore();
+    }
+
+    // cajas de la ruta con su número de visita
+    ctx.font = "bold 11px system-ui"; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+    ruta.ruta.forEach((idx, k) => {
+      if (largos[k + 1] > limite) return;
+      const n = nodos[idx], [x, y] = px(n);
+      ctx.save(); ctx.translate(x, y);
+      ctx.fillStyle = COLOR_CAPA[n.capa]; ctx.strokeStyle = "#fff"; ctx.lineWidth = 1.5;
+      forma(n, 6); ctx.fill(); ctx.stroke();
+      ctx.fillStyle = "#fff"; ctx.strokeStyle = "#000"; ctx.lineWidth = 3;
+      ctx.strokeText(k + 1, 0, -13); ctx.fillText(k + 1, 0, -13);
+      ctx.restore();
+    });
+
+    // inicio
+    const [sx, sy] = px(nodos[0]);
+    ctx.save(); ctx.translate(sx, sy); ctx.rotate(Math.PI / 4);
+    ctx.fillStyle = "#fff"; ctx.strokeStyle = color; ctx.lineWidth = 3;
+    ctx.fillRect(-9, -9, 18, 18); ctx.strokeRect(-9, -9, 18, 18);
+    ctx.restore();
+
+    actualizarStats(ruta);
+    dibujarConvergencia();
+  }
+
+  function actualizarStats(ruta) {
+    const c = corrida();
+    const cuenta = {};
+    for (const i of ruta.ruta) { const k = nodos[i].tipo; cuenta[k] = (cuenta[k] || 0) + 1; }
+    $("sAlmas").textContent = Math.round(ruta.almas);
+    const d = (ruta.almas / c.voraz.almas - 1) * 100;
+    $("sDelta").innerHTML = estado.modo === "sma" ? `<span class="delta">${d >= 0 ? "+" : ""}${d.toFixed(1)}%</span> ${t("vsVoraz")}` : t("lineaBase");
+    $("sCajas").textContent = ruta.ruta.length;
+    $("sMix").textContent = t("mezcla", { c: cuenta.caja || 0, u: cuenta.urna || 0 });
+    $("sTiempo").textContent = ruta.tiempo.toFixed(1) + " s";
+    $("sTmax").textContent = t("limite", { t: c.tmax });
+    $("sVoraz").textContent = Math.round(c.voraz.almas);
+    $("sVorazC").textContent = t("nCajas", { n: c.voraz.ruta.length });
+    const reps = c.almas_reps.length > 1 ? t("reps", { n: c.almas_reps.length, m: (c.almas_reps.reduce((a, b) => a + b) / c.almas_reps.length).toFixed(1) }) : "";
+    $("sIter").textContent = t("iteracion", { i: estado.iter + 1, n: c.sma.historia_mejor.length }) + reps;
+  }
+
+  function dibujarConvergencia() {
+    const c = corrida(), hm = c.sma.historia_mejor, hp = c.sma.historia_media;
+    const w = conv.width, h = conv.height, m = { l: 44, r: 10, t: 10, b: 24 };
+    cctx.clearRect(0, 0, w, h);
+    const todos = [...hm, ...hp, c.voraz.almas];
+    const lo = Math.min(...todos) * 0.95, hi = Math.max(...todos) * 1.03;
+    const X = i => m.l + (i / Math.max(1, hm.length - 1)) * (w - m.l - m.r);
+    const Y = v => h - m.b - ((v - lo) / (hi - lo)) * (h - m.t - m.b);
+
+    cctx.font = "18px system-ui"; cctx.fillStyle = "#8a9894"; cctx.strokeStyle = "#2c3333"; cctx.lineWidth = 1;
+    cctx.textAlign = "right"; cctx.textBaseline = "middle";
+    for (let k = 0; k <= 3; k++) {
+      const v = lo + (hi - lo) * k / 3;
+      cctx.beginPath(); cctx.moveTo(m.l, Y(v)); cctx.lineTo(w - m.r, Y(v)); cctx.stroke();
+      cctx.fillText(Math.round(v), m.l - 6, Y(v));
+    }
+    const linea = (serie, color, ancho) => {
+      cctx.strokeStyle = color; cctx.lineWidth = ancho; cctx.beginPath();
+      serie.forEach((v, i) => i ? cctx.lineTo(X(i), Y(v)) : cctx.moveTo(X(i), Y(v)));
+      cctx.stroke();
+    };
+    cctx.setLineDash([8, 6]); linea(hm.map(() => c.voraz.almas), C_VORAZ, 2); cctx.setLineDash([]);
+    linea(hp, "#6b7a76", 2);
+    linea(hm, C_SMA, 3.5);
+    cctx.strokeStyle = "#fff"; cctx.lineWidth = 1.5;
+    cctx.beginPath(); cctx.moveTo(X(estado.iter), m.t); cctx.lineTo(X(estado.iter), h - m.b); cctx.stroke();
+  }
+
+  function animarTrazo() {
+    cancelAnimationFrame(estado.anim);
+    const t0 = performance.now(), dur = 1800;
+    const paso = t => {
+      estado.progreso = Math.min(1, (t - t0) / dur);
+      dibujar();
+      if (estado.progreso < 1) estado.anim = requestAnimationFrame(paso);
+    };
+    estado.anim = requestAnimationFrame(paso);
+  }
+
+  function irAlFinal() {
+    const n = corrida().sma.historia_mejor.length;
+    $("rngIter").max = n - 1; $("rngIter").value = n - 1; estado.iter = n - 1;
+  }
+
+  function parar() { clearInterval(estado.play); estado.play = null; $("btnPlay").textContent = t("reproducir"); }
+
+  function rotularCorridas() {
+    for (const o of $("selCorrida").options) o.textContent = `${o.dataset.tmax} s  (${t("deco_" + o.dataset.deco)})`;
+  }
+  rotularCorridas();
+
+  document.addEventListener("idioma", () => {
+    rotularCorridas();
+    $("btnPlay").textContent = t(estado.play ? "pausa" : "reproducir");
+    dibujar();
+  });
+
+  $("selCorrida").onchange = e => { parar(); estado.corrida = +e.target.value; irAlFinal(); animarTrazo(); };
+  $("selFondo").onchange = dibujar;
+  $("chkTodos").onchange = dibujar;
+  $("rngIter").oninput = e => { parar(); estado.iter = +e.target.value; estado.progreso = 1; dibujar(); };
+  for (const [id, modo] of [["btnSma", "sma"], ["btnVoraz", "voraz"]]) {
+    $(id).onclick = () => {
+      estado.modo = modo;
+      $("btnSma").classList.toggle("on", modo === "sma");
+      $("btnVoraz").classList.toggle("on", modo === "voraz");
+      animarTrazo();
+    };
+  }
+  $("btnPlay").onclick = () => {
+    if (estado.play) return parar();
+    const n = corrida().sma.historia_mejor.length;
+    if (estado.iter >= n - 1) estado.iter = 0;
+    $("btnPlay").textContent = t("pausa");
+    estado.modo = "sma"; $("btnSma").classList.add("on"); $("btnVoraz").classList.remove("on");
+    estado.progreso = 1;
+    const salto = Math.max(1, Math.round(n / 150));
+    estado.play = setInterval(() => {
+      estado.iter = Math.min(n - 1, estado.iter + salto);
+      $("rngIter").value = estado.iter;
+      dibujar();
+      if (estado.iter >= n - 1) parar();
+    }, 40);
+  };
+
+  // tooltip
+  lienzo.addEventListener("mousemove", e => {
+    const r = lienzo.getBoundingClientRect();
+    const mx = (e.clientX - r.left) / r.width * W, my = (e.clientY - r.top) / r.height * H;
+    let mejor = null, dmin = 12;
+    for (const n of nodos) {
+      const d = Math.hypot(n.x * W - mx, n.y * H - my);
+      if (d < dmin) { dmin = d; mejor = n; }
+    }
+    const tip = $("tip");
+    if (!mejor) { tip.style.display = "none"; return; }
+    const orden = rutaActual().ruta.indexOf(mejor.idx);
+    tip.textContent = mejor.idx === 0 ? t("inicio")
+      : `#${mejor.idx} · ${t("tipo_" + mejor.tipo)} · ${t("capa_" + mejor.capa)}` + (orden >= 0 ? " · " + t("visita", { n: orden + 1 }) : "");
+    tip.style.display = "block";
+    tip.style.left = (e.clientX - r.left + 12) + "px";
+    tip.style.top = (e.clientY - r.top + 12) + "px";
+  });
+  lienzo.addEventListener("mouseleave", () => $("tip").style.display = "none");
+
+  parar();
+  irAlFinal();
+  animarTrazo();
+})();
+</script>
+</body>
+</html>

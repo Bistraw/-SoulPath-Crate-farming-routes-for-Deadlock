@@ -1,0 +1,4825 @@
+{
+ "imagen": "todos.webp",
+ "tam": [
+  2000,
+  2000
+ ],
+ "nodos": [
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.7405,
+   "y": 0.19825,
+   "id": 1
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.75123,
+   "y": 0.19827,
+   "id": 2
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.76173,
+   "y": 0.19848,
+   "id": 3
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.27725,
+   "y": 0.20625,
+   "id": 4
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.596,
+   "y": 0.20893,
+   "id": 5
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.22725,
+   "y": 0.209,
+   "id": 6
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.21698,
+   "y": 0.20901,
+   "id": 7
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.84589,
+   "y": 0.20901,
+   "id": 8
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.23777,
+   "y": 0.20902,
+   "id": 9
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.79843,
+   "y": 0.21427,
+   "id": 10
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.75901,
+   "y": 0.21698,
+   "id": 11
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.1905,
+   "y": 0.217,
+   "id": 12
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.84586,
+   "y": 0.21934,
+   "id": 13
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.59581,
+   "y": 0.21945,
+   "id": 14
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.81949,
+   "y": 0.22204,
+   "id": 15
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.25122,
+   "y": 0.22222,
+   "id": 16
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.22475,
+   "y": 0.22225,
+   "id": 17
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.26171,
+   "y": 0.22226,
+   "id": 18
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.30627,
+   "y": 0.22457,
+   "id": 19
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.18253,
+   "y": 0.22725,
+   "id": 20
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.759,
+   "y": 0.22725,
+   "id": 21
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.84588,
+   "y": 0.23008,
+   "id": 22
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.66149,
+   "y": 0.23255,
+   "id": 23
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.63777,
+   "y": 0.23273,
+   "id": 24
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.30629,
+   "y": 0.23527,
+   "id": 25
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.34573,
+   "y": 0.23527,
+   "id": 26
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.64827,
+   "y": 0.23798,
+   "id": 27
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.75103,
+   "y": 0.2405,
+   "id": 28
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.36422,
+   "y": 0.24575,
+   "id": 29
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.83778,
+   "y": 0.24575,
+   "id": 30
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.37503,
+   "y": 0.24587,
+   "id": 31
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.40373,
+   "y": 0.24825,
+   "id": 32
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.64827,
+   "y": 0.24827,
+   "id": 33
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.33525,
+   "y": 0.24828,
+   "id": 34
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.41425,
+   "y": 0.24828,
+   "id": 35
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.32475,
+   "y": 0.2485,
+   "id": 36
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.75129,
+   "y": 0.2511,
+   "id": 37
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.34575,
+   "y": 0.25375,
+   "id": 38
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.36425,
+   "y": 0.25625,
+   "id": 39
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.3905,
+   "y": 0.25625,
+   "id": 40
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.64825,
+   "y": 0.259,
+   "id": 41
+  },
+  {
+   "tipo": "urna",
+   "capa": "azotea",
+   "color": "rosa",
+   "x": 0.34575,
+   "y": 0.26425,
+   "id": 42
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.37477,
+   "y": 0.26427,
+   "id": 43
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.14048,
+   "y": 0.26695,
+   "id": 44
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.29825,
+   "y": 0.26697,
+   "id": 45
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.13005,
+   "y": 0.26698,
+   "id": 46
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.64825,
+   "y": 0.2695,
+   "id": 47
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.27475,
+   "y": 0.27225,
+   "id": 48
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.28525,
+   "y": 0.27225,
+   "id": 49
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.41153,
+   "y": 0.27225,
+   "id": 50
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.42227,
+   "y": 0.27739,
+   "id": 51
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.65375,
+   "y": 0.28,
+   "id": 52
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.12727,
+   "y": 0.28004,
+   "id": 53
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.4326,
+   "y": 0.28249,
+   "id": 54
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.47728,
+   "y": 0.28525,
+   "id": 55
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.63797,
+   "y": 0.28525,
+   "id": 56
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.53798,
+   "y": 0.29049,
+   "id": 57
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.5274,
+   "y": 0.29052,
+   "id": 58
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.49847,
+   "y": 0.29325,
+   "id": 59
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.51425,
+   "y": 0.29325,
+   "id": 60
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.3405,
+   "y": 0.29575,
+   "id": 61
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.351,
+   "y": 0.29575,
+   "id": 62
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.63804,
+   "y": 0.29592,
+   "id": 63
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.11697,
+   "y": 0.29825,
+   "id": 64
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.47497,
+   "y": 0.29825,
+   "id": 65
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.46427,
+   "y": 0.29827,
+   "id": 66
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.10625,
+   "y": 0.29828,
+   "id": 67
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.69322,
+   "y": 0.29847,
+   "id": 68
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.68265,
+   "y": 0.29848,
+   "id": 69
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.52727,
+   "y": 0.30123,
+   "id": 70
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.53798,
+   "y": 0.30123,
+   "id": 71
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.2801,
+   "y": 0.30124,
+   "id": 72
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.14824,
+   "y": 0.30355,
+   "id": 73
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.51424,
+   "y": 0.30355,
+   "id": 74
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.71151,
+   "y": 0.3037,
+   "id": 75
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.13275,
+   "y": 0.30375,
+   "id": 76
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.63797,
+   "y": 0.30625,
+   "id": 77
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.06149,
+   "y": 0.30898,
+   "id": 78
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.07225,
+   "y": 0.309,
+   "id": 79
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.65125,
+   "y": 0.309,
+   "id": 80
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.72225,
+   "y": 0.309,
+   "id": 81
+  },
+  {
+   "tipo": "urna",
+   "capa": "azotea",
+   "color": "rosa",
+   "x": 0.75377,
+   "y": 0.31151,
+   "id": 82
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.52725,
+   "y": 0.31153,
+   "id": 83
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.69846,
+   "y": 0.31174,
+   "id": 84
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.41425,
+   "y": 0.31675,
+   "id": 85
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.63001,
+   "y": 0.31677,
+   "id": 86
+  },
+  {
+   "tipo": "urna",
+   "capa": "azotea",
+   "color": "rosa",
+   "x": 0.6195,
+   "y": 0.317,
+   "id": 87
+  },
+  {
+   "tipo": "urna",
+   "capa": "azotea",
+   "color": "rosa",
+   "x": 0.6405,
+   "y": 0.317,
+   "id": 88
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.48797,
+   "y": 0.31944,
+   "id": 89
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.65102,
+   "y": 0.31948,
+   "id": 90
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.72225,
+   "y": 0.3195,
+   "id": 91
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.76162,
+   "y": 0.32204,
+   "id": 92
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.77205,
+   "y": 0.32214,
+   "id": 93
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.11421,
+   "y": 0.32215,
+   "id": 94
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.78272,
+   "y": 0.32222,
+   "id": 95
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.52727,
+   "y": 0.32223,
+   "id": 96
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.10355,
+   "y": 0.32224,
+   "id": 97
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.12459,
+   "y": 0.32226,
+   "id": 98
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.32461,
+   "y": 0.32461,
+   "id": 99
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.47724,
+   "y": 0.3247,
+   "id": 100
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.43253,
+   "y": 0.32725,
+   "id": 101
+  },
+  {
+   "tipo": "urna",
+   "capa": "azotea",
+   "color": "rosa",
+   "x": 0.4065,
+   "y": 0.3275,
+   "id": 102
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.65125,
+   "y": 0.33,
+   "id": 103
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.46677,
+   "y": 0.33001,
+   "id": 104
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.52721,
+   "y": 0.33264,
+   "id": 105
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.30372,
+   "y": 0.33523,
+   "id": 106
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.47727,
+   "y": 0.33523,
+   "id": 107
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.63003,
+   "y": 0.33525,
+   "id": 108
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.61934,
+   "y": 0.33529,
+   "id": 109
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.31678,
+   "y": 0.33778,
+   "id": 110
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.41425,
+   "y": 0.33778,
+   "id": 111
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.33256,
+   "y": 0.33802,
+   "id": 112
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.79577,
+   "y": 0.34048,
+   "id": 113
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.46677,
+   "y": 0.34049,
+   "id": 114
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.64325,
+   "y": 0.3405,
+   "id": 115
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.71675,
+   "y": 0.3405,
+   "id": 116
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.75632,
+   "y": 0.34317,
+   "id": 117
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.4905,
+   "y": 0.34325,
+   "id": 118
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.509,
+   "y": 0.34325,
+   "id": 119
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.76697,
+   "y": 0.34325,
+   "id": 120
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.8195,
+   "y": 0.34325,
+   "id": 121
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.67993,
+   "y": 0.34328,
+   "id": 122
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.06948,
+   "y": 0.35102,
+   "id": 123
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.64325,
+   "y": 0.35103,
+   "id": 124
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.059,
+   "y": 0.35125,
+   "id": 125
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.70124,
+   "y": 0.35363,
+   "id": 126
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.76675,
+   "y": 0.35375,
+   "id": 127
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.6799,
+   "y": 0.35379,
+   "id": 128
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.30355,
+   "y": 0.35624,
+   "id": 129
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.27727,
+   "y": 0.35627,
+   "id": 130
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.47223,
+   "y": 0.35627,
+   "id": 131
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.42225,
+   "y": 0.359,
+   "id": 132
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.64325,
+   "y": 0.36153,
+   "id": 133
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.45375,
+   "y": 0.36172,
+   "id": 134
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.55382,
+   "y": 0.36415,
+   "id": 135
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.76169,
+   "y": 0.36422,
+   "id": 136
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.77201,
+   "y": 0.36423,
+   "id": 137
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.12472,
+   "y": 0.36947,
+   "id": 138
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.11425,
+   "y": 0.3695,
+   "id": 139
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.42225,
+   "y": 0.3695,
+   "id": 140
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.47225,
+   "y": 0.3695,
+   "id": 141
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.56442,
+   "y": 0.37197,
+   "id": 142
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.64323,
+   "y": 0.37223,
+   "id": 143
+  },
+  {
+   "tipo": "urna",
+   "capa": "subterraneo",
+   "color": "verde",
+   "x": 0.68259,
+   "y": 0.37224,
+   "id": 144
+  },
+  {
+   "tipo": "urna",
+   "capa": "azotea",
+   "color": "rosa",
+   "x": 0.75103,
+   "y": 0.37475,
+   "id": 145
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.40626,
+   "y": 0.37476,
+   "id": 146
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.52734,
+   "y": 0.37479,
+   "id": 147
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.79827,
+   "y": 0.37489,
+   "id": 148
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.81153,
+   "y": 0.37725,
+   "id": 149
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.13523,
+   "y": 0.37727,
+   "id": 150
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.30115,
+   "y": 0.37737,
+   "id": 151
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.47226,
+   "y": 0.38002,
+   "id": 152
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.12473,
+   "y": 0.38015,
+   "id": 153
+  },
+  {
+   "tipo": "caja",
+   "capa": "subterraneo",
+   "color": "azul",
+   "x": 0.68253,
+   "y": 0.3825,
+   "id": 154
+  },
+  {
+   "tipo": "caja",
+   "capa": "subterraneo",
+   "color": "azul",
+   "x": 0.63003,
+   "y": 0.38253,
+   "id": 155
+  },
+  {
+   "tipo": "caja",
+   "capa": "subterraneo",
+   "color": "azul",
+   "x": 0.6405,
+   "y": 0.38253,
+   "id": 156
+  },
+  {
+   "tipo": "urna",
+   "capa": "subterraneo",
+   "color": "verde",
+   "x": 0.65125,
+   "y": 0.38253,
+   "id": 157
+  },
+  {
+   "tipo": "caja",
+   "capa": "subterraneo",
+   "color": "azul",
+   "x": 0.6615,
+   "y": 0.38253,
+   "id": 158
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.28003,
+   "y": 0.38525,
+   "id": 159
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.36697,
+   "y": 0.38525,
+   "id": 160
+  },
+  {
+   "tipo": "urna",
+   "capa": "azotea",
+   "color": "rosa",
+   "x": 0.4065,
+   "y": 0.38528,
+   "id": 161
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.93002,
+   "y": 0.38777,
+   "id": 162
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.7905,
+   "y": 0.38779,
+   "id": 163
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.91942,
+   "y": 0.38796,
+   "id": 164
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.81153,
+   "y": 0.38797,
+   "id": 165
+  },
+  {
+   "tipo": "urna",
+   "capa": "azotea",
+   "color": "rosa",
+   "x": 0.301,
+   "y": 0.388,
+   "id": 166
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.56152,
+   "y": 0.39049,
+   "id": 167
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.2905,
+   "y": 0.3905,
+   "id": 168
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.55125,
+   "y": 0.3905,
+   "id": 169
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.54049,
+   "y": 0.39052,
+   "id": 170
+  },
+  {
+   "tipo": "urna",
+   "capa": "azotea",
+   "color": "rosa",
+   "x": 0.34575,
+   "y": 0.393,
+   "id": 171
+  },
+  {
+   "tipo": "caja",
+   "capa": "subterraneo",
+   "color": "azul",
+   "x": 0.73002,
+   "y": 0.39323,
+   "id": 172
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.33524,
+   "y": 0.39324,
+   "id": 173
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.35626,
+   "y": 0.39324,
+   "id": 174
+  },
+  {
+   "tipo": "caja",
+   "capa": "subterraneo",
+   "color": "azul",
+   "x": 0.68253,
+   "y": 0.39325,
+   "id": 175
+  },
+  {
+   "tipo": "urna",
+   "capa": "subterraneo",
+   "color": "verde",
+   "x": 0.7195,
+   "y": 0.39325,
+   "id": 176
+  },
+  {
+   "tipo": "caja",
+   "capa": "subterraneo",
+   "color": "azul",
+   "x": 0.7405,
+   "y": 0.39325,
+   "id": 177
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.40628,
+   "y": 0.39575,
+   "id": 178
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.27749,
+   "y": 0.39577,
+   "id": 179
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.41935,
+   "y": 0.39586,
+   "id": 180
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.36689,
+   "y": 0.3959,
+   "id": 181
+  },
+  {
+   "tipo": "caja",
+   "capa": "subterraneo",
+   "color": "azul",
+   "x": 0.65373,
+   "y": 0.3959,
+   "id": 182
+  },
+  {
+   "tipo": "caja",
+   "capa": "subterraneo",
+   "color": "azul",
+   "x": 0.66424,
+   "y": 0.39593,
+   "id": 183
+  },
+  {
+   "tipo": "caja",
+   "capa": "subterraneo",
+   "color": "azul",
+   "x": 0.64325,
+   "y": 0.39597,
+   "id": 184
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.79052,
+   "y": 0.39827,
+   "id": 185
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.25625,
+   "y": 0.39828,
+   "id": 186
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.10127,
+   "y": 0.40357,
+   "id": 187
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.72462,
+   "y": 0.40367,
+   "id": 188
+  },
+  {
+   "tipo": "urna",
+   "capa": "subterraneo",
+   "color": "verde",
+   "x": 0.61946,
+   "y": 0.40374,
+   "id": 189
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.12475,
+   "y": 0.40375,
+   "id": 190
+  },
+  {
+   "tipo": "urna",
+   "capa": "subterraneo",
+   "color": "verde",
+   "x": 0.73525,
+   "y": 0.40375,
+   "id": 191
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.759,
+   "y": 0.40375,
+   "id": 192
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.27747,
+   "y": 0.40625,
+   "id": 193
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.65363,
+   "y": 0.40625,
+   "id": 194
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.68253,
+   "y": 0.40625,
+   "id": 195
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.69325,
+   "y": 0.40625,
+   "id": 196
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.67223,
+   "y": 0.40627,
+   "id": 197
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.74848,
+   "y": 0.40898,
+   "id": 198
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.2405,
+   "y": 0.409,
+   "id": 199
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.25625,
+   "y": 0.409,
+   "id": 200
+  },
+  {
+   "tipo": "urna",
+   "capa": "azotea",
+   "color": "rosa",
+   "x": 0.29575,
+   "y": 0.409,
+   "id": 201
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.80125,
+   "y": 0.409,
+   "id": 202
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.23004,
+   "y": 0.40901,
+   "id": 203
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.26698,
+   "y": 0.40901,
+   "id": 204
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.13002,
+   "y": 0.41423,
+   "id": 205
+  },
+  {
+   "tipo": "urna",
+   "capa": "azotea",
+   "color": "rosa",
+   "x": 0.75901,
+   "y": 0.41423,
+   "id": 206
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.72459,
+   "y": 0.41425,
+   "id": 207
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.47997,
+   "y": 0.41427,
+   "id": 208
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.4698,
+   "y": 0.41437,
+   "id": 209
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.42205,
+   "y": 0.41677,
+   "id": 210
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.6905,
+   "y": 0.41678,
+   "id": 211
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.43525,
+   "y": 0.41697,
+   "id": 212
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.309,
+   "y": 0.417,
+   "id": 213
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.44575,
+   "y": 0.41703,
+   "id": 214
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.55375,
+   "y": 0.41703,
+   "id": 215
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.6537,
+   "y": 0.41705,
+   "id": 216
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.26696,
+   "y": 0.41942,
+   "id": 217
+  },
+  {
+   "tipo": "urna",
+   "capa": "azotea",
+   "color": "rosa",
+   "x": 0.27748,
+   "y": 0.41948,
+   "id": 218
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.80124,
+   "y": 0.41948,
+   "id": 219
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.25625,
+   "y": 0.4195,
+   "id": 220
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.64325,
+   "y": 0.4195,
+   "id": 221
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.74846,
+   "y": 0.41952,
+   "id": 222
+  },
+  {
+   "tipo": "urna",
+   "capa": "subterraneo",
+   "color": "verde",
+   "x": 0.70114,
+   "y": 0.42224,
+   "id": 223
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.53255,
+   "y": 0.42459,
+   "id": 224
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.67995,
+   "y": 0.42472,
+   "id": 225
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.93003,
+   "y": 0.42723,
+   "id": 226
+  },
+  {
+   "tipo": "urna",
+   "capa": "azotea",
+   "color": "rosa",
+   "x": 0.69049,
+   "y": 0.42738,
+   "id": 227
+  },
+  {
+   "tipo": "urna",
+   "capa": "azotea",
+   "color": "rosa",
+   "x": 0.73,
+   "y": 0.4275,
+   "id": 228
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.25628,
+   "y": 0.42995,
+   "id": 229
+  },
+  {
+   "tipo": "urna",
+   "capa": "azotea",
+   "color": "rosa",
+   "x": 0.24575,
+   "y": 0.43,
+   "id": 230
+  },
+  {
+   "tipo": "urna",
+   "capa": "subterraneo",
+   "color": "verde",
+   "x": 0.29325,
+   "y": 0.43,
+   "id": 231
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.79325,
+   "y": 0.43,
+   "id": 232
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.78252,
+   "y": 0.43001,
+   "id": 233
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.58251,
+   "y": 0.43003,
+   "id": 234
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.59323,
+   "y": 0.43005,
+   "id": 235
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.19322,
+   "y": 0.43523,
+   "id": 236
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.35903,
+   "y": 0.43525,
+   "id": 237
+  },
+  {
+   "tipo": "urna",
+   "capa": "azotea",
+   "color": "rosa",
+   "x": 0.68001,
+   "y": 0.43527,
+   "id": 238
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.81425,
+   "y": 0.43781,
+   "id": 239
+  },
+  {
+   "tipo": "urna",
+   "capa": "subterraneo",
+   "color": "verde",
+   "x": 0.73798,
+   "y": 0.43798,
+   "id": 240
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.93003,
+   "y": 0.438,
+   "id": 241
+  },
+  {
+   "tipo": "caja",
+   "capa": "subterraneo",
+   "color": "azul",
+   "x": 0.72475,
+   "y": 0.43803,
+   "id": 242
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.61931,
+   "y": 0.44581,
+   "id": 243
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.19329,
+   "y": 0.44584,
+   "id": 244
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.20352,
+   "y": 0.44589,
+   "id": 245
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.80366,
+   "y": 0.44823,
+   "id": 246
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.79323,
+   "y": 0.44843,
+   "id": 247
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.30375,
+   "y": 0.451,
+   "id": 248
+  },
+  {
+   "tipo": "caja",
+   "capa": "subterraneo",
+   "color": "azul",
+   "x": 0.32471,
+   "y": 0.45107,
+   "id": 249
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.31425,
+   "y": 0.45122,
+   "id": 250
+  },
+  {
+   "tipo": "caja",
+   "capa": "subterraneo",
+   "color": "azul",
+   "x": 0.33523,
+   "y": 0.45123,
+   "id": 251
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.91947,
+   "y": 0.45355,
+   "id": 252
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.61947,
+   "y": 0.45623,
+   "id": 253
+  },
+  {
+   "tipo": "caja",
+   "capa": "subterraneo",
+   "color": "azul",
+   "x": 0.47727,
+   "y": 0.45898,
+   "id": 254
+  },
+  {
+   "tipo": "caja",
+   "capa": "subterraneo",
+   "color": "azul",
+   "x": 0.48798,
+   "y": 0.45898,
+   "id": 255
+  },
+  {
+   "tipo": "caja",
+   "capa": "subterraneo",
+   "color": "azul",
+   "x": 0.509,
+   "y": 0.459,
+   "id": 256
+  },
+  {
+   "tipo": "caja",
+   "capa": "subterraneo",
+   "color": "azul",
+   "x": 0.53,
+   "y": 0.459,
+   "id": 257
+  },
+  {
+   "tipo": "urna",
+   "capa": "subterraneo",
+   "color": "verde",
+   "x": 0.49848,
+   "y": 0.45901,
+   "id": 258
+  },
+  {
+   "tipo": "caja",
+   "capa": "subterraneo",
+   "color": "azul",
+   "x": 0.51948,
+   "y": 0.45901,
+   "id": 259
+  },
+  {
+   "tipo": "caja",
+   "capa": "subterraneo",
+   "color": "azul",
+   "x": 0.46697,
+   "y": 0.45903,
+   "id": 260
+  },
+  {
+   "tipo": "urna",
+   "capa": "azotea",
+   "color": "rosa",
+   "x": 0.3325,
+   "y": 0.4615,
+   "id": 261
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.78253,
+   "y": 0.4615,
+   "id": 262
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.31681,
+   "y": 0.46155,
+   "id": 263
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.69575,
+   "y": 0.46425,
+   "id": 264
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.91948,
+   "y": 0.46425,
+   "id": 265
+  },
+  {
+   "tipo": "caja",
+   "capa": "subterraneo",
+   "color": "azul",
+   "x": 0.5116,
+   "y": 0.46933,
+   "id": 266
+  },
+  {
+   "tipo": "caja",
+   "capa": "subterraneo",
+   "color": "azul",
+   "x": 0.50124,
+   "y": 0.46945,
+   "id": 267
+  },
+  {
+   "tipo": "caja",
+   "capa": "subterraneo",
+   "color": "azul",
+   "x": 0.46697,
+   "y": 0.46947,
+   "id": 268
+  },
+  {
+   "tipo": "caja",
+   "capa": "subterraneo",
+   "color": "azul",
+   "x": 0.48003,
+   "y": 0.46947,
+   "id": 269
+  },
+  {
+   "tipo": "caja",
+   "capa": "subterraneo",
+   "color": "azul",
+   "x": 0.53003,
+   "y": 0.46947,
+   "id": 270
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.61935,
+   "y": 0.46947,
+   "id": 271
+  },
+  {
+   "tipo": "urna",
+   "capa": "subterraneo",
+   "color": "verde",
+   "x": 0.49049,
+   "y": 0.46948,
+   "id": 272
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.30625,
+   "y": 0.4695,
+   "id": 273
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.33273,
+   "y": 0.47204,
+   "id": 274
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.31947,
+   "y": 0.47227,
+   "id": 275
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.66697,
+   "y": 0.47474,
+   "id": 276
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.67732,
+   "y": 0.47475,
+   "id": 277
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.688,
+   "y": 0.47493,
+   "id": 278
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.05122,
+   "y": 0.47725,
+   "id": 279
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.9405,
+   "y": 0.47725,
+   "id": 280
+  },
+  {
+   "tipo": "caja",
+   "capa": "subterraneo",
+   "color": "azul",
+   "x": 0.46698,
+   "y": 0.48001,
+   "id": 281
+  },
+  {
+   "tipo": "caja",
+   "capa": "subterraneo",
+   "color": "azul",
+   "x": 0.53004,
+   "y": 0.48001,
+   "id": 282
+  },
+  {
+   "tipo": "urna",
+   "capa": "subterraneo",
+   "color": "verde",
+   "x": 0.48798,
+   "y": 0.48002,
+   "id": 283
+  },
+  {
+   "tipo": "urna",
+   "capa": "subterraneo",
+   "color": "verde",
+   "x": 0.50898,
+   "y": 0.48002,
+   "id": 284
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.30901,
+   "y": 0.48005,
+   "id": 285
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.61945,
+   "y": 0.48006,
+   "id": 286
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.44575,
+   "y": 0.48275,
+   "id": 287
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.659,
+   "y": 0.48525,
+   "id": 288
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.68003,
+   "y": 0.48525,
+   "id": 289
+  },
+  {
+   "tipo": "urna",
+   "capa": "azotea",
+   "color": "rosa",
+   "x": 0.66949,
+   "y": 0.48527,
+   "id": 290
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.90902,
+   "y": 0.48777,
+   "id": 291
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.0878,
+   "y": 0.4878,
+   "id": 292
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.69325,
+   "y": 0.48797,
+   "id": 293
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.80362,
+   "y": 0.48801,
+   "id": 294
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.19325,
+   "y": 0.49052,
+   "id": 295
+  },
+  {
+   "tipo": "urna",
+   "capa": "subterraneo",
+   "color": "verde",
+   "x": 0.48798,
+   "y": 0.49052,
+   "id": 296
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.55901,
+   "y": 0.49052,
+   "id": 297
+  },
+  {
+   "tipo": "urna",
+   "capa": "subterraneo",
+   "color": "verde",
+   "x": 0.509,
+   "y": 0.49053,
+   "id": 298
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.43797,
+   "y": 0.49325,
+   "id": 299
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.44828,
+   "y": 0.49325,
+   "id": 300
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.1695,
+   "y": 0.49846,
+   "id": 301
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.83273,
+   "y": 0.49848,
+   "id": 302
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.55901,
+   "y": 0.5036,
+   "id": 303
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.54826,
+   "y": 0.50373,
+   "id": 304
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.80355,
+   "y": 0.50624,
+   "id": 305
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.43798,
+   "y": 0.50627,
+   "id": 306
+  },
+  {
+   "tipo": "urna",
+   "capa": "subterraneo",
+   "color": "verde",
+   "x": 0.50898,
+   "y": 0.50644,
+   "id": 307
+  },
+  {
+   "tipo": "urna",
+   "capa": "subterraneo",
+   "color": "verde",
+   "x": 0.48795,
+   "y": 0.50646,
+   "id": 308
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.19331,
+   "y": 0.50892,
+   "id": 309
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.909,
+   "y": 0.509,
+   "id": 310
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.08777,
+   "y": 0.50902,
+   "id": 311
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.30357,
+   "y": 0.50903,
+   "id": 312
+  },
+  {
+   "tipo": "urna",
+   "capa": "azotea",
+   "color": "rosa",
+   "x": 0.3275,
+   "y": 0.5115,
+   "id": 313
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.33779,
+   "y": 0.51171,
+   "id": 314
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.31676,
+   "y": 0.51174,
+   "id": 315
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.551,
+   "y": 0.51421,
+   "id": 316
+  },
+  {
+   "tipo": "urna",
+   "capa": "subterraneo",
+   "color": "verde",
+   "x": 0.48795,
+   "y": 0.51673,
+   "id": 317
+  },
+  {
+   "tipo": "urna",
+   "capa": "subterraneo",
+   "color": "verde",
+   "x": 0.50899,
+   "y": 0.51677,
+   "id": 318
+  },
+  {
+   "tipo": "caja",
+   "capa": "subterraneo",
+   "color": "azul",
+   "x": 0.53003,
+   "y": 0.51697,
+   "id": 319
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.688,
+   "y": 0.51697,
+   "id": 320
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.37727,
+   "y": 0.51698,
+   "id": 321
+  },
+  {
+   "tipo": "caja",
+   "capa": "subterraneo",
+   "color": "azul",
+   "x": 0.46695,
+   "y": 0.51701,
+   "id": 322
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.94583,
+   "y": 0.51945,
+   "id": 323
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.05625,
+   "y": 0.5195,
+   "id": 324
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.31944,
+   "y": 0.52221,
+   "id": 325
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.309,
+   "y": 0.52225,
+   "id": 326
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.33,
+   "y": 0.52225,
+   "id": 327
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.67724,
+   "y": 0.52463,
+   "id": 328
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.66425,
+   "y": 0.52475,
+   "id": 329
+  },
+  {
+   "tipo": "caja",
+   "capa": "subterraneo",
+   "color": "azul",
+   "x": 0.46697,
+   "y": 0.52725,
+   "id": 330
+  },
+  {
+   "tipo": "caja",
+   "capa": "subterraneo",
+   "color": "azul",
+   "x": 0.49575,
+   "y": 0.52725,
+   "id": 331
+  },
+  {
+   "tipo": "caja",
+   "capa": "subterraneo",
+   "color": "azul",
+   "x": 0.51697,
+   "y": 0.52725,
+   "id": 332
+  },
+  {
+   "tipo": "caja",
+   "capa": "subterraneo",
+   "color": "azul",
+   "x": 0.53,
+   "y": 0.52725,
+   "id": 333
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.6905,
+   "y": 0.52725,
+   "id": 334
+  },
+  {
+   "tipo": "caja",
+   "capa": "subterraneo",
+   "color": "azul",
+   "x": 0.48523,
+   "y": 0.52727,
+   "id": 335
+  },
+  {
+   "tipo": "urna",
+   "capa": "subterraneo",
+   "color": "verde",
+   "x": 0.50629,
+   "y": 0.52727,
+   "id": 336
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.37725,
+   "y": 0.52728,
+   "id": 337
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.07727,
+   "y": 0.5326,
+   "id": 338
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.30104,
+   "y": 0.53272,
+   "id": 339
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.68001,
+   "y": 0.53523,
+   "id": 340
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.21425,
+   "y": 0.53525,
+   "id": 341
+  },
+  {
+   "tipo": "urna",
+   "capa": "azotea",
+   "color": "rosa",
+   "x": 0.66425,
+   "y": 0.53525,
+   "id": 342
+  },
+  {
+   "tipo": "urna",
+   "capa": "subterraneo",
+   "color": "verde",
+   "x": 0.49842,
+   "y": 0.53783,
+   "id": 343
+  },
+  {
+   "tipo": "caja",
+   "capa": "subterraneo",
+   "color": "azul",
+   "x": 0.47725,
+   "y": 0.53797,
+   "id": 344
+  },
+  {
+   "tipo": "caja",
+   "capa": "subterraneo",
+   "color": "azul",
+   "x": 0.48797,
+   "y": 0.538,
+   "id": 345
+  },
+  {
+   "tipo": "caja",
+   "capa": "subterraneo",
+   "color": "azul",
+   "x": 0.50903,
+   "y": 0.538,
+   "id": 346
+  },
+  {
+   "tipo": "caja",
+   "capa": "subterraneo",
+   "color": "azul",
+   "x": 0.5195,
+   "y": 0.538,
+   "id": 347
+  },
+  {
+   "tipo": "caja",
+   "capa": "subterraneo",
+   "color": "azul",
+   "x": 0.53,
+   "y": 0.538,
+   "id": 348
+  },
+  {
+   "tipo": "caja",
+   "capa": "subterraneo",
+   "color": "azul",
+   "x": 0.46695,
+   "y": 0.53801,
+   "id": 349
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.37725,
+   "y": 0.5405,
+   "id": 350
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.07727,
+   "y": 0.54323,
+   "id": 351
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.68247,
+   "y": 0.54558,
+   "id": 352
+  },
+  {
+   "tipo": "caja",
+   "capa": "subterraneo",
+   "color": "azul",
+   "x": 0.66149,
+   "y": 0.54573,
+   "id": 353
+  },
+  {
+   "tipo": "caja",
+   "capa": "subterraneo",
+   "color": "azul",
+   "x": 0.67225,
+   "y": 0.54575,
+   "id": 354
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.69325,
+   "y": 0.54575,
+   "id": 355
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.19325,
+   "y": 0.54828,
+   "id": 356
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.20375,
+   "y": 0.5485,
+   "id": 357
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.37725,
+   "y": 0.55122,
+   "id": 358
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.79325,
+   "y": 0.55122,
+   "id": 359
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.80353,
+   "y": 0.55125,
+   "id": 360
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.18275,
+   "y": 0.559,
+   "id": 361
+  },
+  {
+   "tipo": "urna",
+   "capa": "subterraneo",
+   "color": "verde",
+   "x": 0.259,
+   "y": 0.559,
+   "id": 362
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.06698,
+   "y": 0.55901,
+   "id": 363
+  },
+  {
+   "tipo": "caja",
+   "capa": "subterraneo",
+   "color": "azul",
+   "x": 0.27223,
+   "y": 0.55902,
+   "id": 364
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.6378,
+   "y": 0.5617,
+   "id": 365
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.80373,
+   "y": 0.56173,
+   "id": 366
+  },
+  {
+   "tipo": "urna",
+   "capa": "azotea",
+   "color": "rosa",
+   "x": 0.31678,
+   "y": 0.56175,
+   "id": 367
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.40375,
+   "y": 0.56675,
+   "id": 368
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.7405,
+   "y": 0.56678,
+   "id": 369
+  },
+  {
+   "tipo": "urna",
+   "capa": "subterraneo",
+   "color": "verde",
+   "x": 0.70379,
+   "y": 0.56686,
+   "id": 370
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.21426,
+   "y": 0.56695,
+   "id": 371
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.41425,
+   "y": 0.56697,
+   "id": 372
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.20352,
+   "y": 0.56698,
+   "id": 373
+  },
+  {
+   "tipo": "urna",
+   "capa": "azotea",
+   "color": "rosa",
+   "x": 0.751,
+   "y": 0.567,
+   "id": 374
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.06696,
+   "y": 0.56945,
+   "id": 375
+  },
+  {
+   "tipo": "urna",
+   "capa": "azotea",
+   "color": "rosa",
+   "x": 0.267,
+   "y": 0.5695,
+   "id": 376
+  },
+  {
+   "tipo": "urna",
+   "capa": "azotea",
+   "color": "rosa",
+   "x": 0.3065,
+   "y": 0.56962,
+   "id": 377
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.31678,
+   "y": 0.57203,
+   "id": 378
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.46425,
+   "y": 0.57225,
+   "id": 379
+  },
+  {
+   "tipo": "urna",
+   "capa": "subterraneo",
+   "color": "verde",
+   "x": 0.29575,
+   "y": 0.57475,
+   "id": 380
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.35372,
+   "y": 0.57723,
+   "id": 381
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.73,
+   "y": 0.57725,
+   "id": 382
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.7405,
+   "y": 0.57725,
+   "id": 383
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.19593,
+   "y": 0.57727,
+   "id": 384
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.24847,
+   "y": 0.57728,
+   "id": 385
+  },
+  {
+   "tipo": "urna",
+   "capa": "azotea",
+   "color": "rosa",
+   "x": 0.71948,
+   "y": 0.57748,
+   "id": 386
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.34325,
+   "y": 0.58,
+   "id": 387
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.44325,
+   "y": 0.58,
+   "id": 388
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.57475,
+   "y": 0.58,
+   "id": 389
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.30627,
+   "y": 0.58001,
+   "id": 390
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.688,
+   "y": 0.58003,
+   "id": 391
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.55123,
+   "y": 0.58023,
+   "id": 392
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.56153,
+   "y": 0.58025,
+   "id": 393
+  },
+  {
+   "tipo": "urna",
+   "capa": "azotea",
+   "color": "rosa",
+   "x": 0.238,
+   "y": 0.5825,
+   "id": 394
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.86698,
+   "y": 0.58252,
+   "id": 395
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.27225,
+   "y": 0.58253,
+   "id": 396
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.52731,
+   "y": 0.58257,
+   "id": 397
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.51675,
+   "y": 0.58275,
+   "id": 398
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.2485,
+   "y": 0.58778,
+   "id": 399
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.76691,
+   "y": 0.58795,
+   "id": 400
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.75625,
+   "y": 0.58797,
+   "id": 401
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.74049,
+   "y": 0.58798,
+   "id": 402
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.19593,
+   "y": 0.58799,
+   "id": 403
+  },
+  {
+   "tipo": "urna",
+   "capa": "azotea",
+   "color": "rosa",
+   "x": 0.701,
+   "y": 0.588,
+   "id": 404
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.73003,
+   "y": 0.588,
+   "id": 405
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.30375,
+   "y": 0.5905,
+   "id": 406
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.31425,
+   "y": 0.5905,
+   "id": 407
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.32456,
+   "y": 0.5905,
+   "id": 408
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.34325,
+   "y": 0.5905,
+   "id": 409
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.7195,
+   "y": 0.5905,
+   "id": 410
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.27223,
+   "y": 0.59323,
+   "id": 411
+  },
+  {
+   "tipo": "urna",
+   "capa": "subterraneo",
+   "color": "verde",
+   "x": 0.26153,
+   "y": 0.59325,
+   "id": 412
+  },
+  {
+   "tipo": "urna",
+   "capa": "subterraneo",
+   "color": "verde",
+   "x": 0.37725,
+   "y": 0.59325,
+   "id": 413
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.87211,
+   "y": 0.59325,
+   "id": 414
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.89597,
+   "y": 0.59325,
+   "id": 415
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.2379,
+   "y": 0.59328,
+   "id": 416
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.7405,
+   "y": 0.59825,
+   "id": 417
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.20625,
+   "y": 0.59828,
+   "id": 418
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.71965,
+   "y": 0.60096,
+   "id": 419
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.59052,
+   "y": 0.60102,
+   "id": 420
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.57727,
+   "y": 0.60123,
+   "id": 421
+  },
+  {
+   "tipo": "caja",
+   "capa": "subterraneo",
+   "color": "azul",
+   "x": 0.33253,
+   "y": 0.60125,
+   "id": 422
+  },
+  {
+   "tipo": "caja",
+   "capa": "subterraneo",
+   "color": "azul",
+   "x": 0.34325,
+   "y": 0.60125,
+   "id": 423
+  },
+  {
+   "tipo": "caja",
+   "capa": "subterraneo",
+   "color": "azul",
+   "x": 0.35375,
+   "y": 0.60125,
+   "id": 424
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.63,
+   "y": 0.60125,
+   "id": 425
+  },
+  {
+   "tipo": "caja",
+   "capa": "subterraneo",
+   "color": "azul",
+   "x": 0.25623,
+   "y": 0.60357,
+   "id": 426
+  },
+  {
+   "tipo": "caja",
+   "capa": "subterraneo",
+   "color": "azul",
+   "x": 0.26701,
+   "y": 0.60357,
+   "id": 427
+  },
+  {
+   "tipo": "caja",
+   "capa": "subterraneo",
+   "color": "azul",
+   "x": 0.31426,
+   "y": 0.60363,
+   "id": 428
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.66158,
+   "y": 0.6037,
+   "id": 429
+  },
+  {
+   "tipo": "urna",
+   "capa": "azotea",
+   "color": "rosa",
+   "x": 0.65101,
+   "y": 0.60373,
+   "id": 430
+  },
+  {
+   "tipo": "urna",
+   "capa": "subterraneo",
+   "color": "verde",
+   "x": 0.27725,
+   "y": 0.60375,
+   "id": 431
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.6405,
+   "y": 0.60375,
+   "id": 432
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.43525,
+   "y": 0.60625,
+   "id": 433
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.45625,
+   "y": 0.60625,
+   "id": 434
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.70625,
+   "y": 0.60625,
+   "id": 435
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.44584,
+   "y": 0.60627,
+   "id": 436
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.06675,
+   "y": 0.609,
+   "id": 437
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.07725,
+   "y": 0.609,
+   "id": 438
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.18525,
+   "y": 0.609,
+   "id": 439
+  },
+  {
+   "tipo": "urna",
+   "capa": "azotea",
+   "color": "rosa",
+   "x": 0.69575,
+   "y": 0.609,
+   "id": 440
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.20625,
+   "y": 0.60903,
+   "id": 441
+  },
+  {
+   "tipo": "urna",
+   "capa": "azotea",
+   "color": "rosa",
+   "x": 0.5905,
+   "y": 0.6115,
+   "id": 442
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.63003,
+   "y": 0.6115,
+   "id": 443
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.71673,
+   "y": 0.61163,
+   "id": 444
+  },
+  {
+   "tipo": "caja",
+   "capa": "subterraneo",
+   "color": "azul",
+   "x": 0.31425,
+   "y": 0.61425,
+   "id": 445
+  },
+  {
+   "tipo": "caja",
+   "capa": "subterraneo",
+   "color": "azul",
+   "x": 0.33525,
+   "y": 0.61425,
+   "id": 446
+  },
+  {
+   "tipo": "urna",
+   "capa": "subterraneo",
+   "color": "verde",
+   "x": 0.34575,
+   "y": 0.61425,
+   "id": 447
+  },
+  {
+   "tipo": "caja",
+   "capa": "subterraneo",
+   "color": "azul",
+   "x": 0.35625,
+   "y": 0.61425,
+   "id": 448
+  },
+  {
+   "tipo": "caja",
+   "capa": "subterraneo",
+   "color": "azul",
+   "x": 0.36697,
+   "y": 0.61425,
+   "id": 449
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.87225,
+   "y": 0.61697,
+   "id": 450
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.52475,
+   "y": 0.61701,
+   "id": 451
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.86154,
+   "y": 0.6194,
+   "id": 452
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.18526,
+   "y": 0.61948,
+   "id": 453
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.69575,
+   "y": 0.6195,
+   "id": 454
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.59052,
+   "y": 0.62202,
+   "id": 455
+  },
+  {
+   "tipo": "urna",
+   "capa": "azotea",
+   "color": "rosa",
+   "x": 0.24575,
+   "y": 0.62203,
+   "id": 456
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.46951,
+   "y": 0.62219,
+   "id": 457
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.19827,
+   "y": 0.62223,
+   "id": 458
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.43268,
+   "y": 0.62452,
+   "id": 459
+  },
+  {
+   "tipo": "urna",
+   "capa": "subterraneo",
+   "color": "verde",
+   "x": 0.31425,
+   "y": 0.62475,
+   "id": 460
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.35368,
+   "y": 0.62478,
+   "id": 461
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.52475,
+   "y": 0.62722,
+   "id": 462
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.57489,
+   "y": 0.62725,
+   "id": 463
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.88253,
+   "y": 0.62725,
+   "id": 464
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.87223,
+   "y": 0.62727,
+   "id": 465
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.44325,
+   "y": 0.63253,
+   "id": 466
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.22475,
+   "y": 0.63272,
+   "id": 467
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.23525,
+   "y": 0.63275,
+   "id": 468
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.54323,
+   "y": 0.63524,
+   "id": 469
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.35375,
+   "y": 0.63525,
+   "id": 470
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.57487,
+   "y": 0.63798,
+   "id": 471
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.71936,
+   "y": 0.64045,
+   "id": 472
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.69325,
+   "y": 0.6405,
+   "id": 473
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.52468,
+   "y": 0.64051,
+   "id": 474
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.23003,
+   "y": 0.64325,
+   "id": 475
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.31675,
+   "y": 0.64325,
+   "id": 476
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.29589,
+   "y": 0.64329,
+   "id": 477
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.35375,
+   "y": 0.64575,
+   "id": 478
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.92732,
+   "y": 0.64575,
+   "id": 479
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.93803,
+   "y": 0.64575,
+   "id": 480
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.23011,
+   "y": 0.65364,
+   "id": 481
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.17726,
+   "y": 0.65366,
+   "id": 482
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.31676,
+   "y": 0.65374,
+   "id": 483
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.2405,
+   "y": 0.65375,
+   "id": 484
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.5062,
+   "y": 0.65375,
+   "id": 485
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.48802,
+   "y": 0.6539,
+   "id": 486
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.35364,
+   "y": 0.65621,
+   "id": 487
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.20122,
+   "y": 0.65625,
+   "id": 488
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.28005,
+   "y": 0.65627,
+   "id": 489
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.53001,
+   "y": 0.65627,
+   "id": 490
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.58272,
+   "y": 0.659,
+   "id": 491
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.66425,
+   "y": 0.659,
+   "id": 492
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.68,
+   "y": 0.659,
+   "id": 493
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.51934,
+   "y": 0.66151,
+   "id": 494
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.69325,
+   "y": 0.66153,
+   "id": 495
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.37722,
+   "y": 0.66155,
+   "id": 496
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.36678,
+   "y": 0.66172,
+   "id": 497
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.4695,
+   "y": 0.66425,
+   "id": 498
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.53001,
+   "y": 0.66677,
+   "id": 499
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.34575,
+   "y": 0.66697,
+   "id": 500
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.56425,
+   "y": 0.6695,
+   "id": 501
+  },
+  {
+   "tipo": "urna",
+   "capa": "azotea",
+   "color": "rosa",
+   "x": 0.5905,
+   "y": 0.6695,
+   "id": 502
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.67223,
+   "y": 0.67223,
+   "id": 503
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.51947,
+   "y": 0.67227,
+   "id": 504
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.21425,
+   "y": 0.67475,
+   "id": 505
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.23525,
+   "y": 0.67475,
+   "id": 506
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.88275,
+   "y": 0.67475,
+   "id": 507
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.22474,
+   "y": 0.67476,
+   "id": 508
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.89326,
+   "y": 0.67477,
+   "id": 509
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.46942,
+   "y": 0.67481,
+   "id": 510
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.8723,
+   "y": 0.67482,
+   "id": 511
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.27487,
+   "y": 0.67724,
+   "id": 512
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.509,
+   "y": 0.67725,
+   "id": 513
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.34575,
+   "y": 0.67735,
+   "id": 514
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.58272,
+   "y": 0.68,
+   "id": 515
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.36677,
+   "y": 0.68001,
+   "id": 516
+  },
+  {
+   "tipo": "urna",
+   "capa": "azotea",
+   "color": "rosa",
+   "x": 0.35648,
+   "y": 0.68002,
+   "id": 517
+  },
+  {
+   "tipo": "urna",
+   "capa": "azotea",
+   "color": "rosa",
+   "x": 0.37748,
+   "y": 0.68002,
+   "id": 518
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.4695,
+   "y": 0.68525,
+   "id": 519
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.29845,
+   "y": 0.68527,
+   "id": 520
+  },
+  {
+   "tipo": "urna",
+   "capa": "azotea",
+   "color": "rosa",
+   "x": 0.24303,
+   "y": 0.68531,
+   "id": 521
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.93525,
+   "y": 0.68797,
+   "id": 522
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.27495,
+   "y": 0.68801,
+   "id": 523
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.34592,
+   "y": 0.68801,
+   "id": 524
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.92462,
+   "y": 0.68802,
+   "id": 525
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.35901,
+   "y": 0.69052,
+   "id": 526
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.28525,
+   "y": 0.69325,
+   "id": 527
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.48253,
+   "y": 0.69325,
+   "id": 528
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.84828,
+   "y": 0.69325,
+   "id": 529
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.86425,
+   "y": 0.69325,
+   "id": 530
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.46951,
+   "y": 0.6959,
+   "id": 531
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.45903,
+   "y": 0.69593,
+   "id": 532
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.71701,
+   "y": 0.69593,
+   "id": 533
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.53253,
+   "y": 0.69825,
+   "id": 534
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.88,
+   "y": 0.69825,
+   "id": 535
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.8905,
+   "y": 0.69825,
+   "id": 536
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.52225,
+   "y": 0.69828,
+   "id": 537
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.31427,
+   "y": 0.69849,
+   "id": 538
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.30375,
+   "y": 0.6985,
+   "id": 539
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.64575,
+   "y": 0.701,
+   "id": 540
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.65625,
+   "y": 0.70103,
+   "id": 541
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.359,
+   "y": 0.70125,
+   "id": 542
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.48248,
+   "y": 0.70357,
+   "id": 543
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.4985,
+   "y": 0.70375,
+   "id": 544
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.459,
+   "y": 0.70625,
+   "id": 545
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.46947,
+   "y": 0.70625,
+   "id": 546
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.35901,
+   "y": 0.71152,
+   "id": 547
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.5194,
+   "y": 0.71154,
+   "id": 548
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.56425,
+   "y": 0.71425,
+   "id": 549
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.86948,
+   "y": 0.71677,
+   "id": 550
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.34325,
+   "y": 0.71678,
+   "id": 551
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.57475,
+   "y": 0.7195,
+   "id": 552
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.71152,
+   "y": 0.72452,
+   "id": 553
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.58531,
+   "y": 0.72462,
+   "id": 554
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.72225,
+   "y": 0.72475,
+   "id": 555
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.34828,
+   "y": 0.72725,
+   "id": 556
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.85625,
+   "y": 0.73,
+   "id": 557
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.86697,
+   "y": 0.73001,
+   "id": 558
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.69826,
+   "y": 0.73002,
+   "id": 559
+  },
+  {
+   "tipo": "urna",
+   "capa": "azotea",
+   "color": "rosa",
+   "x": 0.65102,
+   "y": 0.73252,
+   "id": 560
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.62215,
+   "y": 0.73276,
+   "id": 561
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.34827,
+   "y": 0.73798,
+   "id": 562
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.63253,
+   "y": 0.74047,
+   "id": 563
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.60625,
+   "y": 0.7405,
+   "id": 564
+  },
+  {
+   "tipo": "caja",
+   "capa": "azotea",
+   "color": "morado",
+   "x": 0.651,
+   "y": 0.74325,
+   "id": 565
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.24573,
+   "y": 0.74586,
+   "id": 566
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.58253,
+   "y": 0.74825,
+   "id": 567
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.34827,
+   "y": 0.74827,
+   "id": 568
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.66152,
+   "y": 0.74827,
+   "id": 569
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.59325,
+   "y": 0.74828,
+   "id": 570
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.67201,
+   "y": 0.7484,
+   "id": 571
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.15906,
+   "y": 0.75097,
+   "id": 572
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.6327,
+   "y": 0.75109,
+   "id": 573
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.62225,
+   "y": 0.75122,
+   "id": 574
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.24575,
+   "y": 0.75625,
+   "id": 575
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.34825,
+   "y": 0.759,
+   "id": 576
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.69049,
+   "y": 0.76152,
+   "id": 577
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.65107,
+   "y": 0.76169,
+   "id": 578
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.33525,
+   "y": 0.76425,
+   "id": 579
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.35903,
+   "y": 0.76425,
+   "id": 580
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.15125,
+   "y": 0.76697,
+   "id": 581
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.238,
+   "y": 0.76947,
+   "id": 582
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.81425,
+   "y": 0.7695,
+   "id": 583
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.6905,
+   "y": 0.77225,
+   "id": 584
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.74593,
+   "y": 0.7747,
+   "id": 585
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.17737,
+   "y": 0.77478,
+   "id": 586
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.7353,
+   "y": 0.77484,
+   "id": 587
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.77229,
+   "y": 0.77486,
+   "id": 588
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.15122,
+   "y": 0.77725,
+   "id": 589
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.40123,
+   "y": 0.77727,
+   "id": 590
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.238,
+   "y": 0.78013,
+   "id": 591
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.80625,
+   "y": 0.78014,
+   "id": 592
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.19844,
+   "y": 0.7825,
+   "id": 593
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.75887,
+   "y": 0.78772,
+   "id": 594
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.15123,
+   "y": 0.78798,
+   "id": 595
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.40123,
+   "y": 0.78798,
+   "id": 596
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.76947,
+   "y": 0.788,
+   "id": 597
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.78003,
+   "y": 0.788,
+   "id": 598
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.71942,
+   "y": 0.7905,
+   "id": 599
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.25627,
+   "y": 0.79827,
+   "id": 600
+  },
+  {
+   "tipo": "caja",
+   "capa": "superficie",
+   "color": "rojo",
+   "x": 0.24589,
+   "y": 0.79829,
+   "id": 601
+  },
+  {
+   "tipo": "urna",
+   "capa": "superficie",
+   "color": "amarillo",
+   "x": 0.23525,
+   "y": 0.79847,
+   "id": 602
+  }
+ ]
+}

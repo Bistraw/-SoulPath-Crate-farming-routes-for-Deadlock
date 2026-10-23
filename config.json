@@ -1,0 +1,14 @@
+{
+  "_nota": "Valores de juego aproximados: calibrarlos midiendo en partida (ver README).",
+  "inicio": { "nombre": "Base", "x": 0.5, "y": 0.915 },
+  "ancho_mapa_m": 500,
+  "velocidad_ms": 8.0,
+  "tortuosidad": 1.3,
+  "penalizacion_capa_s": 4.0,
+  "tiempo_romper_s": { "caja": 1.0, "urna": 1.5 },
+  "almas": { "caja": 10, "urna": 15 },
+  "regresar_al_inicio": true,
+  "tmax": 90,
+  "decodificador": "guiado",
+  "sma": { "poblacion": 30, "iteraciones": 200, "z": 0.03, "semilla": 42 }
+}
