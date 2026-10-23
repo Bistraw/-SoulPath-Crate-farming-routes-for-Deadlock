@@ -39,10 +39,21 @@
   }
   .titulo-deco::before { background-image: url(assets/ui/divisor.png); }
   .titulo-deco::after { background-image: url(assets/ui/divisor-izq.png); background-position: left center; }
-  main { display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: 16px; padding: 16px; }
-  @media (max-width: 900px) { main { grid-template-columns: 1fr; } }
+  /* el mapa (cuadrado) mide lo que queda de la ventana bajo el encabezado: se ve completo sin scroll.
+     --alto-header lo mide el script; 140px es solo el valor mientras carga */
+  :root { --alto-header: 140px; --lado-mapa: calc(100vh - var(--alto-header) - 32px); }
+  @supports (height: 100dvh) { :root { --lado-mapa: calc(100dvh - var(--alto-header) - 32px); } }
+  main {
+    display: grid; grid-template-columns: minmax(0, var(--lado-mapa)) 380px; justify-content: center;
+    gap: 16px; padding: 16px;
+  }
+  footer { max-width: calc(var(--lado-mapa) + 380px + 48px); margin-inline: auto; }
+  @media (max-width: 900px) {
+    main { grid-template-columns: 1fr; }
+    .mapa { position: relative !important; }
+  }
   .mapa {
-    align-self: start; position: relative; background: #0b0d0d padding-box;
+    align-self: start; position: sticky; top: 16px; background: #0b0d0d padding-box;
     border: 28px solid transparent; border-image: url(assets/ui/marco.png) 28 / 28px stretch;
     image-rendering: pixelated;
   }
@@ -270,6 +281,10 @@ function aplicarIdioma(lang) {
 }
 
 document.querySelectorAll(".idioma button").forEach(b => b.onclick = () => aplicarIdioma(b.dataset.lang));
+
+// el alto del encabezado cambia con el idioma, las fuentes y el ancho; el mapa se ajusta a lo que sobra
+new ResizeObserver(([e]) => document.documentElement.style.setProperty("--alto-header", e.target.offsetHeight + "px"))
+  .observe(document.querySelector("header"));
 {
   let guardado = null;
   try { guardado = localStorage.getItem("soulpath-idioma"); } catch (e) {}
