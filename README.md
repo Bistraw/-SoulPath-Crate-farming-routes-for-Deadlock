@@ -14,6 +14,7 @@ almas con un límite de tiempo (Orienteering Problem), resuelta con SMA (Li et a
 | `extraer_nodos.py` | Detecta los cuadritos de color del mapa y genera `datos/nodos.json` (602 nodos). |
 | `config.json` | Parámetros del juego (velocidad, almas, tiempos) y del SMA. |
 | `sma_deadlock.py` | Instancia (matriz C, almas S), decodificadores, SMA, línea base voraz. |
+| `sma_cuda.py` | Kernel CUDA que decodifica toda la población en GPU (opción `--gpu`). |
 | `visor/index.html` | Visualización: ruta sobre el mapa, convergencia y reproducción por iteración. |
 
 Leyenda de colores del mapa: rojo = caja superficie, amarillo = urna superficie,
@@ -36,6 +37,7 @@ Opciones útiles de `sma_deadlock.py`:
 - `--decodificador estricto|salto|insercion|guiado` compara representaciones.
 - `--repeticiones 10` corre con 10 semillas e imprime media, desviación, mejor y peor.
 - `--procesos 4` evalúa la población en paralelo con `multiprocessing`.
+- `--gpu` evalúa la población en GPU con CUDA (solo decodificador `guiado`; ver abajo).
 - `--capas superficie subterraneo` ignora las azoteas, por ejemplo.
 - `--iteraciones`, `--poblacion`, `--semilla` sobrescriben `config.json`.
 
@@ -82,8 +84,30 @@ aleatorio con probabilidad `z`.
 
 El costo está en `evaluar_poblacion`: decodificar cada agente es independiente, así que es
 paralelismo de datos directo. `--procesos N` ya lo reparte con `multiprocessing.Pool`
-(≈2.2× con 4 procesos en la corrida de 90 s). Otros candidatos: repeticiones independientes en
-paralelo, o el cálculo vectorizado de inserciones en GPU.
+(≈2.2× con 4 procesos en la corrida de 90 s). Otro candidato: repeticiones independientes en
+paralelo.
+
+### GPU (CUDA)
+
+`--gpu` decodifica la población con un kernel CUDA (`sma_cuda.py`, vía CuPy `RawKernel`):
+
+- un bloque por agente, así los N agentes se decodifican a la vez;
+- dentro del bloque, 256 hilos se reparten las cajas candidatas: cada hilo calcula la posición
+  de inserción más barata de sus cajas y su valor almas/tiempo × sesgo;
+- una reducción en memoria compartida elige la caja ganadora y el hilo 0 la inserta en la ruta.
+
+Usa `float64` y los mismos desempates que NumPy, así que las rutas son idénticas a las de CPU
+(misma semilla, mismo resultado). La actualización del SMA sigue en CPU: es barata y así se
+conserva el generador aleatorio. En una GTX 1050, 60 iteraciones con t_max = 90 s bajan de
+25 s a 0.24 s (≈100×).
+
+```bash
+pip install "cupy-cuda12x[ctk]"
+python sma_deadlock.py --tmax 45 90 150 --gpu
+```
+
+El extra `[ctk]` trae NVRTC de CUDA 12. Hace falta en GPUs Pascal (GTX 10xx) porque el toolkit
+de CUDA 13 ya no compila para ellas; el driver puede ser de CUDA 13.
 
 ## Artículo
 

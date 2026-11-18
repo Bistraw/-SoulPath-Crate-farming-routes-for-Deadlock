@@ -10,6 +10,7 @@ Uso:
     python sma_deadlock.py --tmax 60 90 150      # varias corridas, una por t_max
     python sma_deadlock.py --repeticiones 10     # estadística con semillas distintas
     python sma_deadlock.py --procesos 4          # evaluación de la población en paralelo
+    python sma_deadlock.py --gpu                 # evaluación de la población en GPU (CUDA)
 Los resultados se guardan en salidas/ y en visor/resultados.js (para el visor HTML).
 """
 import argparse
@@ -99,8 +100,8 @@ def decodificar_insercion(X, inst):
     for j in np.argsort(-X) + 1:
         if not inst.alcanzable[j]:
             continue
-        a = np.array(sec[:-1])
-        b = np.array(sec[1:])
+        a = np.array(sec[:-1], dtype=int)
+        b = np.array(sec[1:], dtype=int)
         delta = C[a, j] + C[j, b] - C[a, b]
         if not inst.regreso:  # en ruta abierta también se puede agregar al final
             delta = np.append(delta, C[sec[-1], j])
@@ -148,7 +149,10 @@ def _evaluar_uno(x):
     return _INST.almas_ruta(ruta), ruta
 
 
-def evaluar_poblacion(X, inst, deco, pool=None):
+def evaluar_poblacion(X, inst, deco, pool=None, gpu=None):
+    if gpu is not None:
+        rutas = gpu(X)
+        return np.array([inst.almas_ruta(r) for r in rutas]), rutas
     if pool is None:
         res = [(inst.almas_ruta(r), r) for r in (DECODIFICADORES[deco](x, inst) for x in X)]
     else:
@@ -161,7 +165,10 @@ def evaluar_poblacion(X, inst, deco, pool=None):
 # ----------------------------------------------------------------------------
 # SMA (Li et al., 2020) adaptado a maximización
 # ----------------------------------------------------------------------------
-def sma(inst, deco="guiado", poblacion=30, iteraciones=200, z=0.03, semilla=None, procesos=1, verbose=True):
+def sma(inst, deco="guiado", poblacion=30, iteraciones=200, z=0.03, semilla=None, procesos=1, verbose=True,
+        gpu=False):
+    if gpu and deco != "guiado":
+        raise ValueError("--gpu solo implementa el decodificador 'guiado'")
     rng = np.random.default_rng(semilla)
     N, n, T = poblacion, inst.n, iteraciones
     X = rng.random((N, n))
@@ -170,11 +177,15 @@ def sma(inst, deco="guiado", poblacion=30, iteraciones=200, z=0.03, semilla=None
 
     DF, X_best, ruta_best = -np.inf, None, []
     historia_mejor, historia_media, mejoras = [], [], []
-    pool = Pool(procesos, initializer=_init_trabajador, initargs=(inst, deco)) if procesos > 1 else None
+    evaluador = None
+    if gpu:
+        from sma_cuda import EvaluadorCUDA
+        evaluador = gpu if callable(gpu) else EvaluadorCUDA(inst, GAMMA_GUIADO)
+    pool = Pool(procesos, initializer=_init_trabajador, initargs=(inst, deco))         if procesos > 1 and evaluador is None else None
     t0 = time.perf_counter()
     try:
         for it in range(T):
-            fit, rutas = evaluar_poblacion(X, inst, deco, pool)
+            fit, rutas = evaluar_poblacion(X, inst, deco, pool, evaluador)
 
             orden = np.argsort(-fit)              # de mejor a peor
             bF, wF = fit[orden[0]], fit[orden[-1]]
@@ -245,8 +256,8 @@ def _insercion_voraz(inst, sesgo=None):
     t = 0.0
     libres = np.nonzero(inst.alcanzable)[0]
     while len(libres):
-        a = np.array(sec[:-1])
-        b = np.array(sec[1:])
+        a = np.array(sec[:-1], dtype=int)
+        b = np.array(sec[1:], dtype=int)
         delta = C[a][:, libres] + C[libres][:, b].T - C[a, b][:, None]   # (posiciones, candidatos)
         if not inst.regreso:
             delta = np.vstack([delta, C[sec[-1], libres]])
@@ -278,6 +289,7 @@ def main():
     p.add_argument("--semilla", type=int)
     p.add_argument("--repeticiones", type=int, default=1)
     p.add_argument("--procesos", type=int, default=1)
+    p.add_argument("--gpu", action="store_true", help="evaluar la población en GPU con CUDA (solo 'guiado')")
     p.add_argument("--capas", nargs="+", choices=list(NIVEL_CAPA), help="usar solo estas capas")
     args = p.parse_args()
 
@@ -302,10 +314,15 @@ def main():
         print(f"  voraz: {base['almas']:.0f} almas, {len(base['ruta'])} cajas, {base['tiempo']:.1f} s")
 
         resultados = []
+        evaluador = False
+        if args.gpu:
+            from sma_cuda import EvaluadorCUDA
+            evaluador = EvaluadorCUDA(inst, GAMMA_GUIADO)   # se compila y copia una vez por t_max
+            print(f"  GPU: {evaluador.nombre}")
         for rep in range(args.repeticiones):
             sem = None if semilla is None else semilla + rep
             res = sma(inst, deco, poblacion, iteraciones, s["z"], sem, args.procesos,
-                      verbose=args.repeticiones == 1)
+                      verbose=args.repeticiones == 1, gpu=evaluador)
             resultados.append(res)
             print(f"  SMA rep {rep + 1}: {res['almas']:.0f} almas, {len(res['ruta'])} cajas, "
                   f"{res['tiempo']:.1f} s de ruta, {res['segundos_cpu']:.1f} s de cómputo")

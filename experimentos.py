@@ -3,6 +3,7 @@
 1. Comparación de decodificadores (t_max = 90 s).
 2. SMA guiado frente al voraz para varios presupuestos de tiempo.
 3. Tiempo de cómputo con 1, 2, 4 y 8 procesos (evaluación paralela de la población).
+4. Tiempo de cómputo con la evaluación en GPU (CUDA), si hay GPU y CuPy.
 
 Cada configuración se repite con semillas 0..R-1. Resultados en salidas/experimentos.json.
 
@@ -17,7 +18,7 @@ from pathlib import Path
 
 import numpy as np
 
-from sma_deadlock import Instancia, sma, voraz
+from sma_deadlock import GAMMA_GUIADO, Instancia, sma, voraz
 
 RAIZ = Path(__file__).parent
 
@@ -92,6 +93,23 @@ def main():
             tiempos.append(r["segundos_cpu"])
         salida["paralelo"]["res"].append({"procesos": procs, "segundos": resumen(tiempos)})
         print(f"[3] {procs} procesos: {np.mean(tiempos):.2f} s", flush=True)
+
+    # 4. GPU (CUDA): mismas corridas que [3]; las rutas son idénticas a las de CPU
+    import sma_cuda
+    if sma_cuda.disponible():
+        ev = sma_cuda.EvaluadorCUDA(inst90, GAMMA_GUIADO)
+        sma(inst90, "guiado", pob, 2, z, 0, verbose=False, gpu=ev)   # calentamiento: compila el kernel
+        tiempos, almas = [], []
+        for semilla in range(3):
+            r = sma(inst90, "guiado", pob, 30, z, semilla, verbose=False, gpu=ev)
+            tiempos.append(r["segundos_cpu"])
+            almas.append(r["almas"])
+        t1 = salida["paralelo"]["res"][0]["segundos"]["media"]
+        salida["gpu"] = {"tmax": 90, "iteraciones": 30, "dispositivo": ev.nombre,
+                         "segundos": resumen(tiempos), "almas": almas, "aceleracion": t1 / np.mean(tiempos)}
+        print(f"[4] GPU {ev.nombre}: {np.mean(tiempos):.2f} s ({salida['gpu']['aceleracion']:.0f}x)", flush=True)
+    else:
+        print("[4] sin GPU CUDA / CuPy: se omite", flush=True)
 
     salida["duracion_total_s"] = time.perf_counter() - t0
     (RAIZ / "salidas").mkdir(exist_ok=True)
