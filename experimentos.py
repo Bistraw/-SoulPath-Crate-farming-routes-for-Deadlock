@@ -8,6 +8,7 @@
 Cada configuración se repite con semillas 0..R-1. Resultados en salidas/experimentos.json.
 
 Uso:  python experimentos.py [--reps 10] [--iteraciones 100] [--procesos 4]
+      python experimentos.py --solo-gpu   # agrega [4] a un salidas/experimentos.json existente
 """
 import argparse
 import json
@@ -44,16 +45,73 @@ def correr(inst, deco, reps, iteraciones, poblacion, z, procesos):
     }
 
 
+def experimento_gpu(salida, nodos, cfg, args, pob, z):
+    """[4] Mismas corridas que [2] y [3] con la población evaluada en GPU (CUDA).
+
+    Las rutas son idénticas a las de CPU, así que las almas deben coincidir con [2].
+    """
+    import sma_cuda
+    if not sma_cuda.disponible():
+        print("[4] sin GPU CUDA / CuPy: se omite", flush=True)
+        return
+    import cupy as cp
+    inst90 = Instancia(nodos, dict(cfg, tmax=90))
+    ev = sma_cuda.EvaluadorCUDA(inst90, GAMMA_GUIADO)
+    sma(inst90, "guiado", pob, 2, z, 0, verbose=False, gpu=ev)   # calentamiento: compila el kernel
+    en_kernel = [0.0]
+
+    def medido(X):   # mide cuánto del tiempo total se va en el kernel (incluye las copias CPU <-> GPU)
+        t = time.perf_counter()
+        rutas = ev(X)
+        en_kernel[0] += time.perf_counter() - t
+        return rutas
+
+    tiempos = [sma(inst90, "guiado", pob, 30, z, sem, verbose=False, gpu=medido)["segundos_cpu"] for sem in range(3)]
+    fraccion_kernel = en_kernel[0] / sum(tiempos)
+    t1 = salida["paralelo"]["res"][0]["segundos"]["media"]
+    props = cp.cuda.runtime.getDeviceProperties(0)
+    salida["gpu"] = {
+        "dispositivo": ev.nombre, "sms": props["multiProcessorCount"],
+        "memoria_gb": props["totalGlobalMem"] / 2**30,
+        "cc": f"{props['major']}.{props['minor']}", "cupy": cp.__version__,
+        "cuda_nvrtc": ".".join(map(str, cp.cuda.nvrtc.getVersion())),
+        "hilos_bloque": sma_cuda.HILOS,
+        "paralelo": {"tmax": 90, "iteraciones": 30, "segundos": resumen(tiempos), "aceleracion": t1 / np.mean(tiempos),
+                     "fraccion_kernel": fraccion_kernel},
+        "presupuestos": [],
+    }
+    print(f"[4] GPU {ev.nombre}, 30 iteraciones: {np.mean(tiempos):.3f} s ({t1 / np.mean(tiempos):.0f}x)", flush=True)
+    for tmax in [45, 90, 150]:
+        inst = Instancia(nodos, dict(cfg, tmax=tmax))
+        ev = sma_cuda.EvaluadorCUDA(inst, GAMMA_GUIADO)
+        res = [sma(inst, "guiado", pob, args.iteraciones, z, sem, verbose=False, gpu=ev) for sem in range(args.reps)]
+        salida["gpu"]["presupuestos"].append({"tmax": tmax, "almas": [r["almas"] for r in res],
+                                              "resumen": resumen([r["almas"] for r in res]),
+                                              "segundos": resumen([r["segundos_cpu"] for r in res])})
+        print(f"[4] t_max {tmax}: {salida['gpu']['presupuestos'][-1]['resumen']}, "
+              f"{salida['gpu']['presupuestos'][-1]['segundos']['media']:.2f} s", flush=True)
+
+
 def main():
     p = argparse.ArgumentParser()
     p.add_argument("--reps", type=int, default=10)
     p.add_argument("--iteraciones", type=int, default=100)
     p.add_argument("--procesos", type=int, default=4)
+    p.add_argument("--solo-gpu", action="store_true", help="solo correr [4] sobre el JSON existente")
     args = p.parse_args()
 
     cfg = json.loads((RAIZ / "config.json").read_text(encoding="utf-8"))
     nodos = json.loads((RAIZ / "datos" / "nodos.json").read_text(encoding="utf-8"))["nodos"]
     pob, z = cfg["sma"]["poblacion"], cfg["sma"]["z"]
+    if args.solo_gpu:
+        ruta = RAIZ / "salidas" / "experimentos.json"
+        salida = json.loads(ruta.read_text(encoding="utf-8"))
+        P = salida["parametros"]
+        args.reps, args.iteraciones = P["reps"], P["iteraciones"]
+        experimento_gpu(salida, nodos, cfg, args, pob, z)
+        ruta.write_text(json.dumps(salida, indent=1), encoding="utf-8")
+        print("listo -> salidas/experimentos.json")
+        return
     salida = {
         "equipo": {"procesador": platform.processor(), "nucleos_logicos": os.cpu_count(),
                    "python": platform.python_version(), "numpy": np.__version__},
@@ -94,22 +152,7 @@ def main():
         salida["paralelo"]["res"].append({"procesos": procs, "segundos": resumen(tiempos)})
         print(f"[3] {procs} procesos: {np.mean(tiempos):.2f} s", flush=True)
 
-    # 4. GPU (CUDA): mismas corridas que [3]; las rutas son idénticas a las de CPU
-    import sma_cuda
-    if sma_cuda.disponible():
-        ev = sma_cuda.EvaluadorCUDA(inst90, GAMMA_GUIADO)
-        sma(inst90, "guiado", pob, 2, z, 0, verbose=False, gpu=ev)   # calentamiento: compila el kernel
-        tiempos, almas = [], []
-        for semilla in range(3):
-            r = sma(inst90, "guiado", pob, 30, z, semilla, verbose=False, gpu=ev)
-            tiempos.append(r["segundos_cpu"])
-            almas.append(r["almas"])
-        t1 = salida["paralelo"]["res"][0]["segundos"]["media"]
-        salida["gpu"] = {"tmax": 90, "iteraciones": 30, "dispositivo": ev.nombre,
-                         "segundos": resumen(tiempos), "almas": almas, "aceleracion": t1 / np.mean(tiempos)}
-        print(f"[4] GPU {ev.nombre}: {np.mean(tiempos):.2f} s ({salida['gpu']['aceleracion']:.0f}x)", flush=True)
-    else:
-        print("[4] sin GPU CUDA / CuPy: se omite", flush=True)
+    experimento_gpu(salida, nodos, cfg, args, pob, z)
 
     salida["duracion_total_s"] = time.perf_counter() - t0
     (RAIZ / "salidas").mkdir(exist_ok=True)

@@ -52,7 +52,7 @@
 <div class="afiliacion">
   Ingeniería en Computación Inteligente, Universidad Autónoma de Aguascalientes<br>
   Materia: Paralelización de Algoritmos — Profesor: Julio César Ponce Gallegos<br>
-  Fecha: Octubre de 2026
+  Fecha: Noviembre de 2026
 </div>
 
 <div class="resumen">
@@ -66,9 +66,10 @@
   utiliza las llaves como sesgo de una heurística constructiva, obtuvo en promedio 270,0 almas con un presupuesto de
   90 s, 14,9 % más que la heurística voraz de referencia, mientras que el decodificador original alcanzó
   75,5 almas. La evaluación paralela de la población con cuatro procesos redujo el tiempo de cómputo en un factor de
-  2,11.</p>
+  2,11, y su implementación en GPU mediante un kernel CUDA, que reproduce exactamente las rutas de la versión en CPU, en un
+  factor de 140 respecto a la versión secuencial.</p>
   <p><i>Palabras Clave</i>— Slime Mould Algorithm, Deadlock, Orienteering Problem, Optimización Combinatoria, Algoritmos
-  Bioinspirados, Llaves Aleatorias, Recolección de Recursos.</p>
+  Bioinspirados, Llaves Aleatorias, Recolección de Recursos, CUDA, GPU.</p>
 </div>
 
 <div class="cuerpo">
@@ -85,7 +86,7 @@ control de objetivos principales.</p>
 arriesgan el tiempo de juego o pierden densidad de recolección. Este problema requiere un enfoque algorítmico automatizado capaz
 de resolver la disyuntiva entre maximización de recompensa y minimización de tiempo.</p>
 <p>Este documento describe la formulación del problema, el algoritmo secuencial, su implementación sobre una instancia real
-del mapa y los resultados experimentales que servirán como línea base para las versiones paralelas.</p>
+del mapa y dos versiones paralelas de la evaluación de la población: con procesos en CPU y en GPU con CUDA.</p>
 
 <h2>II. Marco Teórico</h2>
 <h3>A. El Problema de Optimización</h3>
@@ -174,8 +175,9 @@ del mapa de <i>Deadlock</i>; la validación con dichas instancias queda como act
 </table>
 
 <h2>IV. Implementación</h2>
-<p>El sistema se implementó en Python 3.12 con NumPy. El código fuente y una herramienta de visualización están disponibles
-públicamente [7]. La implementación se organiza en tres módulos: extracción de la instancia, optimización y visualización.</p>
+<p>El sistema se implementó en Python 3.12 con NumPy; la versión en GPU utiliza CUDA a través de la biblioteca CuPy [8]. El
+código fuente y una herramienta de visualización están disponibles públicamente [7]. La implementación se organiza en cuatro
+módulos: extracción de la instancia, optimización, aceleración en GPU y visualización.</p>
 
 <h3>A. Construcción de la Instancia</h3>
 <p>Las posiciones de los contenedores se obtuvieron de un mapa del juego anotado por el usuario u/Awsmminer de la plataforma
@@ -265,23 +267,67 @@ milisegundos.</p>
 <i>O</i>(<i>Nn</i>). Como la decodificación de cada agente es independiente,
 la función <code>evaluar_poblacion</code> se paraleliza directamente con un conjunto de procesos (<code>multiprocessing.Pool</code>):
 la instancia se copia una sola vez a cada proceso al crearlo y en cada iteración solo se transmiten los vectores <i>X<sub>i</sub></i>
-y las rutas resultantes. La actualización del SMA permanece secuencial. Esta versión constituye un primer paso hacia las
-implementaciones en memoria compartida y GPU descritas en la Sección VIII.</p>
+y las rutas resultantes. La actualización del SMA permanece secuencial.</p>
 
-<h3>G. Herramienta de Visualización</h3>
+<h3>G. Evaluación de la Población en GPU con CUDA</h3>
+<p>La versión con procesos está limitada por el número de núcleos del procesador y por la serialización de datos entre
+procesos. Para explotar el paralelismo de datos con una granularidad más fina, el decodificador guiado se implementó como un
+kernel CUDA escrito en C y compilado en tiempo de ejecución con NVRTC mediante CuPy (módulo <code>sma_cuda.py</code>). El
+paralelismo se organiza en dos niveles:</p>
+<ul class="lista">
+  <li><b>Nivel de agente.</b> Se lanza una malla de <i>N</i> bloques, uno por agente, de modo que la población completa se
+  decodifica en una sola invocación del kernel.</li>
+  <li><b>Nivel de caja.</b> Cada bloque tiene 256 hilos que se reparten las cajas candidatas. En cada paso de la
+  construcción, cada hilo calcula para sus cajas el menor costo de inserción Δ<sub><i>j</i></sub> sobre la ruta actual y el valor
+  <i>g<sub>j</sub></i> de la Ec. (7); una reducción en árbol en memoria compartida obtiene la caja de mayor valor y el hilo 0 la
+  inserta en la ruta.</li>
+</ul>
+<p>La matriz <i>C</i> (alrededor de 2,9 MB en doble precisión) y el vector <i>S</i> se copian a la memoria global de la GPU
+una sola vez por instancia, mientras que la ruta en construcción y los indicadores de cajas disponibles residen en la memoria
+compartida de cada bloque. En cada iteración del SMA solo se transfieren a la GPU los factores de sesgo de la población
+(<i>N</i> × <i>n</i> valores) y se recuperan las rutas. El Algoritmo 2 resume el kernel.</p>
+<div class="algoritmo">
+<p><b>Algoritmo 2:</b> Kernel CUDA (guiado)</p>
+<p>Bloque b = agente; hilo h de H</p>
+<p>1: seq ← (0, 0); t ← 0</p>
+<p>2: libre[j] ← alcanzable[j]</p>
+<p>3: <b>repetir</b></p>
+<p>4: &nbsp;<b>para</b> j = 1+h, 1+h+H, … ≤ n <b>hacer</b></p>
+<p>5: &nbsp;&nbsp;<b>si</b> libre[j]:</p>
+<p>6: &nbsp;&nbsp;&nbsp;Δ_j ← mín. costo de insertar j</p>
+<p>7: &nbsp;&nbsp;&nbsp;<b>si</b> t + Δ_j ≤ t_max:</p>
+<p>8: &nbsp;&nbsp;&nbsp;&nbsp;g_j ← S_j / Δ_j · sesgo[b, j]</p>
+<p>9: &nbsp;<b>fin para</b></p>
+<p>10: (j*, p*) ← argmax g_j (reducción)</p>
+<p>11: <b>si</b> h = 0 y existe j*:</p>
+<p>12: &nbsp;insertar j* tras p*</p>
+<p>13: &nbsp;t ← t + Δ_j*; libre[j*] ← 0</p>
+<p>14: sincronizar hilos del bloque</p>
+<p>15: <b>hasta que</b> ninguna caja quepa</p>
+<p>16: copiar seq a la ruta b</p>
+</div>
+<p>Para conservar la equivalencia con la versión en CPU, el kernel emplea aritmética de doble precisión y los mismos criterios
+de desempate: la primera posición de costo mínimo y, entre valores iguales, la caja de menor índice. La actualización de
+posiciones del SMA se mantiene en CPU porque es una operación vectorizada de bajo costo y así se conserva la secuencia del
+generador de números aleatorios: con la misma semilla, ambas versiones producen la misma ejecución. La GPU utilizada
+(arquitectura Pascal) ya no es compatible con el compilador de CUDA 13, por lo que se empleó NVRTC de CUDA 12,9.</p>
+
+<h3>H. Herramienta de Visualización</h3>
 <p>Se desarrolló un visor web que muestra la ruta sobre el mapa, la curva de convergencia y la evolución de la mejor ruta
 iteración por iteración, con interfaz en español e inglés. Está disponible en
 <code>bistraw.github.io/-SoulPath-Crate-farming-routes-for-Deadlock</code>.</p>
 
 <h2>V. Diseño Experimental</h2>
-<p>Los experimentos se ejecutaron en un equipo con procesador Intel Core i7-7700HQ a 2,80 GHz (4 núcleos físicos, 8 hilos), 32 GB de RAM, Windows 10, Python
-3.12.10 y NumPy 2.5.3. Se utilizó una población de <i>N</i> = 30 agentes, <i>T</i> = 100 iteraciones y
+<p>Los experimentos se ejecutaron en un equipo con procesador Intel Core i7-7700HQ a 2,80 GHz (4 núcleos físicos, 8 hilos), 32 GB de RAM, GPU NVIDIA
+GeForce GTX 1050 (5 multiprocesadores, 640 núcleos CUDA, 4 GB, capacidad de cómputo 6,1),
+Windows 10, Python 3.12.10, NumPy 2.5.3 y CuPy 14.2.0. Se utilizó una población de <i>N</i> = 30 agentes, <i>T</i> = 100 iteraciones y
 <i>z</i> = 0,03. Cada configuración se repitió 10 veces con semillas 0 a 9; se reportan la media, la desviación
-estándar muestral, el mejor y el peor valor. Salvo en el experimento de escalamiento, la población se evaluó con 4 procesos.
-Se realizaron tres experimentos: (i) comparación de los cuatro decodificadores con <i>t</i><sub>max</sub> = 90 s; (ii) desempeño
+estándar muestral, el mejor y el peor valor. Salvo en los experimentos de escalamiento y de GPU, la población se evaluó con 4
+procesos. Se realizaron cuatro experimentos: (i) comparación de los cuatro decodificadores con <i>t</i><sub>max</sub> = 90 s; (ii) desempeño
 del decodificador guiado frente a la heurística voraz con <i>t</i><sub>max</sub> ∈ {45, 90, 150} s, y (iii) tiempo de cómputo
-con 1, 2, 4 y 8 procesos (<i>t</i><sub>max</sub> = 90 s, 30 iteraciones, tres semillas). El experimento completo se reproduce con
-<code>python experimentos.py</code>.</p>
+con 1, 2, 4 y 8 procesos (<i>t</i><sub>max</sub> = 90 s, 30 iteraciones, tres semillas), y (iv) repetición de los
+experimentos (ii) y (iii) con la población evaluada en GPU. El experimento completo se reproduce con
+<code>python experimentos.py</code>; la opción <code style="white-space: nowrap">--solo-gpu</code> ejecuta únicamente el experimento (iv).</p>
 
 <h2>VI. Resultados</h2>
 <h3>A. Comparación de Decodificadores</h3>
@@ -334,6 +380,17 @@ con 1, 2, 4 y 8 procesos (<i>t</i><sub>max</sub> = 90 s, 30 iteraciones, tres se
   <tr><td>8</td><td>6,60 ± 0,80</td><td>2,92</td><td>36,5 %</td></tr>
 </table>
 
+<h3>F. Aceleración en GPU</h3>
+<p>Con la población evaluada en GPU, las 30 iteraciones del experimento anterior requirieron 0,14 ± 0,06 s, frente a 19,29 s de la versión secuencial: una aceleración de 140, 48 veces mayor que la obtenida con 8 procesos. La Tabla VII repite las corridas de la Tabla V (100 iteraciones, 10 semillas) en GPU y las compara con la versión de 4 procesos. En 30 de las 30 corridas la GPU obtuvo exactamente las mismas almas que la CPU con la misma semilla, lo que confirma que el kernel reproduce la decodificación secuencial. La aceleración crece con el presupuesto: de 4,9 con 45 s a 125,3 con 150 s. Con presupuestos cortos las rutas tienen pocas cajas, la decodificación en CPU es barata y predominan los costos fijos de lanzar el kernel y copiar datos; con presupuestos largos cada paso de la construcción evalúa cientos de candidatos, trabajo que en la GPU se reparte entre los hilos del bloque.</p>
+<div class="tcap">Tabla VII<br>CPU (4 Procesos) Frente a GPU, 100 Iteraciones</div>
+<table>
+  <tr><th><i>t</i><sub>max</sub> (s)</th><th>CPU (s)</th><th>GPU (s)</th><th>Aceleración</th><th>Almas iguales</th></tr>
+  <tr><td>45</td><td>1,51</td><td>0,31</td><td>4,9</td><td>10 / 10</td></tr>
+  <tr><td>90</td><td>34,77</td><td>0,37</td><td>95,1</td><td>10 / 10</td></tr>
+  <tr><td>150</td><td>110,85</td><td>0,88</td><td>125,3</td><td>10 / 10</td></tr>
+</table>
+<p>Tras la aceleración, el kernel (incluidas las copias entre CPU y GPU) representa solo el 45,4 % del tiempo de una iteración; el resto corresponde a la actualización del SMA y al cálculo del fitness, que permanecen en CPU. Por la ley de Amdahl, esta parte secuencial es ahora el principal límite para seguir reduciendo el tiempo. Además, con <i>N</i> = 30 se lanzan solo 30 bloques para 5 multiprocesadores, por lo que poblaciones mayores aprovecharían mejor la GPU.</p>
+
 <h2>VII. Discusión</h2>
 <p>Los resultados muestran que la representación por llaves aleatorias, aplicada de forma directa, resulta insuficiente para
 una instancia de este tamaño: con 602 nodos, las primeras posiciones de una permutación aleatoria corresponden a cajas
@@ -348,11 +405,11 @@ modelo estático no considera. Finalmente, la validación con instancias de refe
 
 <h2>VIII. Conclusiones y Trabajo Futuro</h2>
 <p>Se implementó el SMA secuencial para el problema de recolección de cajas en <i>Deadlock</i>, junto con un procedimiento
-automático para construir la instancia a partir de un mapa anotado por la comunidad. La decodificación directa de llaves aleatorias resultó inadecuada para una instancia de 602 nodos, con un desempeño inferior al de una heurística voraz simple. El decodificador guiado, que integra el SMA con dicha heurística, superó a la referencia en promedio entre 14,9 % y 27,3 % según el presupuesto de tiempo. La evaluación paralela de la población con procesos obtuvo una aceleración de 2,11 con cuatro procesos.</p>
-<p>Esta implementación establece la línea base secuencial verificada. En la siguiente etapa del proyecto servirá de punto de
-comparación para versiones paralelas en arquitecturas de memoria compartida (OpenMP / multihilo), donde se espera reducir la
-sobrecarga de comunicación observada con procesos, y para la aceleración por GPU del cálculo de costos de inserción, orientadas
-a la evaluación en tiempo real durante partidas activas. También se contempla calibrar el modelo de tiempos con mediciones en el
+automático para construir la instancia a partir de un mapa anotado por la comunidad. La decodificación directa de llaves aleatorias resultó inadecuada para una instancia de 602 nodos, con un desempeño inferior al de una heurística voraz simple. El decodificador guiado, que integra el SMA con dicha heurística, superó a la referencia en promedio entre 14,9 % y 27,3 % según el presupuesto de tiempo. La evaluación paralela de la población con procesos obtuvo una aceleración de 2,11 con cuatro procesos, y la evaluación en GPU con CUDA, de 140 respecto a la versión secuencial, sin alterar los resultados.</p>
+<p>Con la versión en GPU, una corrida completa del SMA se resuelve en menos de un segundo, lo que acerca su uso en tiempo real
+durante partidas activas. Como trabajo futuro se contempla trasladar también la actualización del SMA a la GPU, que ahora
+domina el tiempo de cómputo, evaluar poblaciones mayores que aprovechen todos los multiprocesadores y comparar con una versión
+en memoria compartida (OpenMP / multihilo) en CPU. También se contempla calibrar el modelo de tiempos con mediciones en el
 juego, sustituir la distancia euclidiana por distancias sobre la malla de navegación del mapa y completar la validación con las
 instancias de KU Leuven.</p>
 
@@ -375,6 +432,8 @@ cajas y urnas de <i>Deadlock</i>, sin el cual no habría sido posible construir 
   <li>u/Awsmminer, “Mapa de cajas y urnas de Deadlock (superficie, subterráneo y azoteas),” Reddit, 2026.</li>
   <li>M. F. Barrón Álvarez, L. M. Benítez Marín, and L. Merino Garfias, “SoulPath: Crate-farming routes for Deadlock,”
   repositorio de código, 2026. [Online]. Available: https://github.com/Bistraw/-SoulPath-Crate-farming-routes-for-Deadlock</li>
+  <li>R. Okuta, Y. Unno, D. Nishino, S. Hido, and C. Loomis, “CuPy: A NumPy-compatible library for NVIDIA GPU calculations,”
+  in <i>Proc. Workshop on Machine Learning Systems (LearningSys), NIPS</i>, 2017.</li>
 </ol>
 
 </div>

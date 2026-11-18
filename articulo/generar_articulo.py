@@ -113,7 +113,56 @@ def construir(cfg, nodos, exp, rutas):
                      f'<td>{f2(sp[k])}</td><td>{f1(sp[k] / k * 100)} %</td></tr>')
     tok["tabla_paralelo"] = "\n  ".join(filas)
 
+    tok.update(tokens_gpu(exp, pres, sp))
     tok.update(textos(exp, dec, v90, pres, sp, rutas, P))
+    return tok
+
+
+def tokens_gpu(exp, pres, sp):
+    gpu = exp["gpu"]
+    gp = gpu["paralelo"]
+    t1 = exp["paralelo"]["res"][0]["segundos"]["media"]
+    tok = {
+        "gpu_nombre": gpu["dispositivo"].replace("NVIDIA ", ""),
+        "gpu_sms": str(gpu["sms"]),
+        "gpu_nucleos": str(gpu["sms"] * 128),   # Pascal (cc 6.x): 128 núcleos CUDA por multiprocesador
+        "gpu_mem": entero(gpu["memoria_gb"]),
+        "gpu_cc": gpu["cc"].replace(".", ","),
+        "cupy": gpu["cupy"], "nvrtc": gpu["cuda_nvrtc"].replace(".", ","),
+        "gpu_hilos": str(gpu["hilos_bloque"]),
+        "gpu_sp": entero(gp["aceleracion"]),
+    }
+    filas = []
+    iguales = total = 0
+    acel = {}
+    for g in gpu["presupuestos"]:
+        c = pres[g["tmax"]]["sma"]
+        acel[g["tmax"]] = c["segundos"]["media"] / g["segundos"]["media"]
+        n_ig = sum(a == b for a, b in zip(c["almas"], g["almas"]))
+        iguales += n_ig
+        total += len(g["almas"])
+        filas.append(f'<tr><td>{g["tmax"]}</td><td>{f2(c["segundos"]["media"])}</td><td>{f2(g["segundos"]["media"])}</td>'
+                     f'<td>{f1(acel[g["tmax"]])}</td><td>{n_ig} / {len(g["almas"])}</td></tr>')
+    tok["tabla_gpu"] = "\n  ".join(filas)
+
+    ts = sorted(acel)
+    tok["texto_gpu"] = (
+        f"Con la población evaluada en GPU, las 30 iteraciones del experimento anterior requirieron {f2(gp['segundos']['media'])} ± "
+        f"{f2(gp['segundos']['desv'])} s, frente a {f2(t1)} s de la versión secuencial: una aceleración de {entero(gp['aceleracion'])}, "
+        f"{entero(gp['aceleracion'] / sp[8])} veces mayor que la obtenida con 8 procesos. La Tabla VII repite las corridas de la Tabla V "
+        f"({exp['parametros']['iteraciones']} iteraciones, {exp['parametros']['reps']} semillas) en GPU y las compara con la "
+        f"versión de 4 procesos. En {iguales} de las {total} corridas la GPU obtuvo exactamente las mismas almas que la CPU con la "
+        f"misma semilla, lo que confirma que el kernel reproduce la decodificación secuencial. La aceleración crece con el "
+        f"presupuesto: de {f1(acel[ts[0]])} con {ts[0]} s a {f1(acel[ts[-1]])} con {ts[-1]} s. Con presupuestos cortos las rutas "
+        f"tienen pocas cajas, la decodificación en CPU es barata y predominan los costos fijos de lanzar el kernel y copiar datos; "
+        f"con presupuestos largos cada paso de la construcción evalúa cientos de candidatos, trabajo que en la GPU se reparte entre "
+        f"los hilos del bloque.")
+    tok["texto_gpu_2"] = (
+        f"Tras la aceleración, el kernel (incluidas las copias entre CPU y GPU) representa solo el "
+        f"{f1(gp['fraccion_kernel'] * 100)} % del tiempo de una iteración; el resto corresponde a la actualización del SMA y al cálculo "
+        f"del fitness, que permanecen en CPU. Por la ley de Amdahl, esta parte secuencial es ahora el principal límite para seguir "
+        f"reduciendo el tiempo. Además, con <i>N</i> = {exp['parametros']['poblacion']} se lanzan solo {exp['parametros']['poblacion']} "
+        f"bloques para {gpu['sms']} multiprocesadores, por lo que poblaciones mayores aprovecharían mejor la GPU.")
     return tok
 
 
@@ -181,7 +230,9 @@ def textos(exp, dec, v90, pres, sp, rutas, P):
         f"nodos, con un desempeño inferior al de una heurística voraz simple. El decodificador guiado, que integra el SMA con dicha "
         f"heurística, superó a la referencia en promedio entre {f1(min(pct(pres[t_]['sma']['resumen']['media'], pres[t_]['voraz']['almas']) for t_ in pres))} % "
         f"y {f1(max(pct(pres[t_]['sma']['resumen']['media'], pres[t_]['voraz']['almas']) for t_ in pres))} % según el presupuesto "
-        f"de tiempo. La evaluación paralela de la población con procesos obtuvo una aceleración de {f2(sp[4])} con cuatro procesos.")
+        f"de tiempo. La evaluación paralela de la población con procesos obtuvo una aceleración de {f2(sp[4])} con cuatro procesos, "
+        f"y la evaluación en GPU con CUDA, de {entero(exp['gpu']['paralelo']['aceleracion'])} respecto a la versión secuencial, "
+        f"sin alterar los resultados.")
     return t
 
 
