@@ -85,6 +85,19 @@ paralelismo de datos directo. `--procesos N` ya lo reparte con `multiprocessing.
 (≈2.2× con 4 procesos en la corrida de 90 s). Otros candidatos: repeticiones independientes en
 paralelo, o el cálculo vectorizado de inserciones en GPU.
 
+## Artículo
+
+`articulo/Articulo_SMA_Deadlock_IEEE.pdf` (formato IEEE) se genera desde los datos, así que se
+puede regenerar si cambian el modelo o los parámetros:
+
+```bash
+python experimentos.py               # ~30 min: 10 repeticiones por configuración
+python articulo/figuras.py           # figuras a partir de salidas/experimentos.json
+python articulo/generar_articulo.py  # HTML + PDF (usa Edge o Chrome)
+```
+
+El texto vive en `articulo/plantilla.html`; las cifras y tablas las llena `generar_articulo.py`.
+
 ## Equipo
 
 María Fernanda Barrón Álvarez, Leslie Miroslava Benítez Marín y Leonardo Merino Garfias.

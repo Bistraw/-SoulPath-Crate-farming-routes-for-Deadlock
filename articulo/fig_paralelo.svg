@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 300" font-family="Times New Roman, serif" font-size="14">
+<rect x="92.0" y="49.7" width="84.0" height="198.3" fill="#3a6fb0"/>
+<text x="134.0" y="43.7" text-anchor="middle">19.3 s (×1.00)</text>
+<text x="134.0" y="266" text-anchor="middle">1</text>
+<rect x="232.0" y="113.9" width="84.0" height="134.1" fill="#3a6fb0"/>
+<text x="274.0" y="107.9" text-anchor="middle">13.1 s (×1.48)</text>
+<text x="274.0" y="266" text-anchor="middle">2</text>
+<rect x="372.0" y="154.1" width="84.0" height="93.9" fill="#3a6fb0"/>
+<text x="414.0" y="148.1" text-anchor="middle">9.1 s (×2.11)</text>
+<text x="414.0" y="266" text-anchor="middle">4</text>
+<rect x="512.0" y="180.1" width="84.0" height="67.9" fill="#3a6fb0"/>
+<text x="554.0" y="174.1" text-anchor="middle">6.6 s (×2.92)</text>
+<text x="554.0" y="266" text-anchor="middle">8</text>
+<line x1="64" x2="624" y1="248" y2="248" stroke="#000"/>
+<text x="352.0" y="290" text-anchor="middle">Número de procesos</text>
+<text transform="translate(18 124.0) rotate(-90)" text-anchor="middle">Tiempo de cómputo (s)</text>
+</svg>

@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Optimización de rutas de recolección de cajas en Deadlock mediante SMA</title>
+<style>
+  @page {
+    size: letter; margin: 0.75in 0.65in 0.8in;
+    @bottom-left { content: "Artículo IEEE (Paralelización de Algoritmos)"; font: 9pt Arial, sans-serif; color: #444; }
+    @bottom-right { content: "Página " counter(page) " de " counter(pages); font: 9pt Arial, sans-serif; color: #444; }
+  }
+  body { font: 10pt/1.32 "Times New Roman", Times, serif; color: #000; margin: 0; }
+  h1 { font: bold 22pt/1.15 "Times New Roman", serif; text-align: center; margin: 0 0 10pt; }
+  .autores { text-align: center; font-weight: bold; font-size: 11pt; margin-bottom: 4pt; }
+  .afiliacion { text-align: center; font-style: italic; font-size: 9.5pt; margin-bottom: 12pt; }
+  .resumen { border: 1px solid #bbb; background: #f6f7f9; padding: 8pt 10pt; font-weight: bold; text-align: justify; margin-bottom: 14pt; font-size: 9.5pt; }
+  .resumen p { margin: 0 0 5pt; }
+  .resumen i { font-weight: bold; }
+  .cuerpo { columns: 2; column-gap: 0.3in; text-align: justify; hyphens: auto; }
+  h2 { font: bold 11pt "Times New Roman", serif; text-align: center; text-transform: uppercase; border-bottom: 1.5px solid #000;
+       padding-bottom: 2pt; margin: 12pt 0 6pt; break-after: avoid; }
+  h3 { font: bold italic 10pt "Times New Roman", serif; margin: 8pt 0 3pt; break-after: avoid; }
+  p { margin: 0 0 5pt; text-indent: 1.2em; }
+  h2 + p, h3 + p, .sinsangria { text-indent: 0; }
+  .ec { display: flex; justify-content: space-between; align-items: center; margin: 5pt 0 6pt; text-indent: 0; }
+  .ec span:first-child { flex: 1; text-align: center; font-style: italic; }
+  .ec span:last-child { width: 2.2em; text-align: right; }
+  table { border-collapse: collapse; width: 100%; font-size: 8.5pt; margin: 4pt 0 8pt; break-inside: avoid; }
+  th, td { border: 1px solid #000; padding: 2pt 3pt; text-align: center; }
+  th { background: #e9ecf2; }
+  td.izq, th.izq { text-align: left; }
+  .tcap { text-align: center; font-size: 8.5pt; font-weight: bold; text-transform: uppercase; margin-top: 8pt; break-after: avoid; }
+  figure { margin: 6pt 0 8pt; break-inside: avoid; text-align: center; }
+  figure img { width: 100%; height: auto; display: block; border: 1px solid #ccc; }
+  figcaption { font-size: 8.5pt; text-align: justify; margin-top: 3pt; }
+  .algoritmo { border: 1px solid #000; padding: 5pt 7pt; font: 8.5pt/1.35 "Courier New", monospace; margin: 4pt 0 8pt; break-inside: avoid; text-align: left; }
+  .algoritmo p { text-indent: 0; margin: 0; }
+  .algoritmo b { font-family: inherit; }
+  ol.refs { list-style: none; counter-reset: ref; padding-left: 2.2em; font-size: 8.5pt; text-align: left; margin: 0; }
+  ol.refs li { counter-increment: ref; margin-bottom: 3pt; position: relative; }
+  ol.refs li::before { content: "[" counter(ref) "]"; position: absolute; left: -2.2em; }
+  ul.lista { margin: 0 0 5pt; padding-left: 1.3em; }
+  ul.lista li { margin-bottom: 2pt; }
+  code { font: 9pt "Courier New", monospace; }
+  .ancho { column-span: all; }
+</style>
+</head>
+<body>
+
+<h1>Optimización de Rutas de Recolección de Cajas en Deadlock Mediante el Algoritmo Slime Mould (SMA)</h1>
+<div class="autores">María Fernanda Barrón Álvarez, Leslie Miroslava Benítez Marín, Leonardo Merino Garfias</div>
+<div class="afiliacion">
+  Ingeniería en Computación Inteligente, Universidad Autónoma de Aguascalientes<br>
+  Materia: Paralelización de Algoritmos — Profesor: Julio César Ponce Gallegos<br>
+  Fecha: Octubre de 2026
+</div>
+
+<div class="resumen">
+  <p><i>Resumen</i>— En el videojuego multijugador <i>Deadlock</i>, la acumulación eficiente de recursos (almas) mediante la
+  recolección de cajas distribuidas espacialmente en el mapa determina el progreso competitivo de los jugadores. Actualmente, las
+  rutas de recolección se establecen empíricamente, sin garantías de optimalidad temporal ni de máximo beneficio. En este trabajo
+  se presenta la implementación secuencial del algoritmo bioinspirado <i>Slime Mould Algorithm</i> (SMA) adaptado a la
+  optimización de rutas con restricción de tiempo, modelada como un <i>Orienteering Problem</i> de un solo agente. La instancia se
+  construyó a partir de un mapa anotado por la comunidad, del cual se extrajeron automáticamente 602 contenedores
+  distribuidos en tres niveles. Se compararon cuatro decodificadores de llaves aleatorias. El decodificador propuesto, que
+  utiliza las llaves como sesgo de una heurística constructiva, obtuvo en promedio 270,0 almas con un presupuesto de
+  90 s, 14,9 % más que la heurística voraz de referencia, mientras que el decodificador original alcanzó
+  75,5 almas. La evaluación paralela de la población con cuatro procesos redujo el tiempo de cómputo en un factor de
+  2,11.</p>
+  <p><i>Palabras Clave</i>— Slime Mould Algorithm, Deadlock, Orienteering Problem, Optimización Combinatoria, Algoritmos
+  Bioinspirados, Llaves Aleatorias, Recolección de Recursos.</p>
+</div>
+
+<div class="cuerpo">
+
+<h2>I. Introducción</h2>
+<p>En los videojuegos de arena de batalla en línea (MOBA) y disparadores como <i>Deadlock</i>, la economía del juego juega un
+rol determinante en la victoria. Las “almas” constituyen la divisa principal para adquirir ítems de mejora, habilidades pasivas
+y equipamiento estadístico.</p>
+<p>Una fuente estratégica de almas la constituyen las cajas neutrales repartidas de forma discreta a lo largo del mapa. Los
+jugadores suelen abandonar periódicamente sus líneas de combate para ejecutar recorridos de recolección. Sin embargo, el tiempo
+dedicado a esta tarea implica un costo de oportunidad directo: el jugador no participa en enfrentamientos, defensa de torres ni
+control de objetivos principales.</p>
+<p>Por consiguiente, la generación empírica de rutas —basada en la intuición del jugador— produce trayectorias subóptimas que
+arriesgan el tiempo de juego o pierden densidad de recolección. Este problema requiere un enfoque algorítmico automatizado capaz
+de resolver la disyuntiva entre maximización de recompensa y minimización de tiempo.</p>
+<p>Este documento describe la formulación del problema, el algoritmo secuencial, su implementación sobre una instancia real
+del mapa y los resultados experimentales que servirán como línea base para las versiones paralelas.</p>
+
+<h2>II. Marco Teórico</h2>
+<h3>A. El Problema de Optimización</h3>
+<p>El problema de recolección en <i>Deadlock</i> se clasifica formalmente como una variante del <i>Orienteering Problem</i> (OP)
+o <i>Team Orienteering Problem</i> (TOP) para un solo agente, combinado con restricciones de presupuesto temporal
+(<i>Traveling Salesperson Problem with Profits</i> - TSPP) [2], [5].</p>
+<p>Sea un grafo completo <i>G</i> = (<i>V</i>, <i>E</i>) donde el conjunto de vértices <i>V</i> = {0, 1, …, <i>n</i>}
+representa las posiciones de las cajas en el mapa, siendo el vértice 0 el punto inicial (y de retorno) del jugador. Cada nodo
+<i>i</i> ∈ <i>V</i> \ {0} tiene asignada una recompensa <i>S<sub>i</sub></i> &gt; 0 equivalente a la cantidad de almas
+obtenibles. Cada arista (<i>i</i>, <i>j</i>) ∈ <i>E</i> tiene un costo de desplazamiento asociado <i>c<sub>ij</sub></i> &gt; 0,
+que modela el tiempo de tránsito euclidiano o real.</p>
+<p>El objetivo consiste en determinar una secuencia de visita o ruta <i>R</i> = (<i>v</i><sub>0</sub>, <i>v</i><sub>1</sub>, …,
+<i>v<sub>k</sub></i>, <i>v</i><sub>0</sub>) tal que se maximice la ganancia acumulada de almas sujeto a no rebasar un tiempo
+máximo prefijado <i>t</i><sub>max</sub>:</p>
+<div class="ec"><span>Maximizar Z = ∑<sub>i ∈ R</sub> S<sub>i</sub></span><span>(1)</span></div>
+<div class="ec"><span>Sujeto a: ∑<sub>(i,j) ∈ R</sub> c<sub>ij</sub> ≤ t<sub>max</sub></span><span>(2)</span></div>
+
+<h3>B. Slime Mould Algorithm (SMA)</h3>
+<p>El algoritmo <i>Slime Mould Algorithm</i> (Li et al., 2020) [1] es una metaheurística bioinspirada basada en el
+comportamiento de forrajeo y oscilación celular del moho de fango <i>Physarum polycephalum</i>. El moho forma una red de tubos
+protoplasmáticos óptimos entre fuentes de alimento aprovechando el flujo citoplásmico retroalimentado por gradientes de
+concentración.</p>
+<p>En la formulación matemática continua de SMA, las posiciones de los moho-agentes se actualizan mediante la variación de pesos
+numéricos <i>W</i> que simulan la contracción citoplásmica según la calidad del alimento (fitness) obtenido:</p>
+<div class="ec"><span>W(i) = 1 ± r · log( (bF − S(i)) / (bF − wF) + 1 )</span><span>(3)</span></div>
+<p class="sinsangria">donde <i>bF</i> es el mejor fitness alcanzado en la iteración actual, <i>wF</i> el peor fitness,
+<i>S</i>(<i>i</i>) el fitness de la solución <i>i</i>, y <i>r</i> un valor aleatorio en el intervalo [0, 1]. El signo positivo
+se aplica a la mitad de la población con mejor fitness y el negativo a la mitad restante. La posición de cada agente se
+actualiza como:</p>
+<div class="ec"><span>X* = X<sub>b</sub> + v<sub>b</sub> · (W · X<sub>A</sub> − X<sub>B</sub>), &nbsp;si r &lt; p<br>X* = v<sub>c</sub> · X, &nbsp;en otro caso</span><span>(4)</span></div>
+<p class="sinsangria">donde <i>X<sub>b</sub></i> es la mejor posición encontrada, <i>X<sub>A</sub></i> y <i>X<sub>B</sub></i>
+son dos agentes elegidos al azar, <i>v<sub>b</sub></i> ∈ [−<i>a</i>, <i>a</i>] y <i>v<sub>c</sub></i> ∈ [−<i>b</i>,
+<i>b</i>] son vectores aleatorios uniformes, y</p>
+<div class="ec"><span>a = arctanh(1 − t/T), &nbsp; b = 1 − t/T, &nbsp; p = tanh|S(i) − DF|</span><span>(5)</span></div>
+<p class="sinsangria">con <i>t</i> la iteración actual, <i>T</i> el número máximo de iteraciones y <i>DF</i> el mejor fitness
+global. Adicionalmente, con probabilidad <i>z</i> un agente se reinicia en una posición aleatoria del espacio de búsqueda, lo
+que preserva la exploración.</p>
+
+<h2>III. Desarrollo del Algoritmo Secuencial</h2>
+<h3>A. Mapeo Discreto del Problema</h3>
+<p>Debido a que SMA fue concebido originalmente para espacios de búsqueda continuos ℝ<sup>d</sup>, para el mapa de
+<i>Deadlock</i> se ha diseñado un mecanismo de mapeo discreto mediante vectores de prioridad continua convertidos a permutaciones
+válidas de cajas mediante la regla del Criterio de Selección Codificada (RK-SMA), basada en la representación de llaves
+aleatorias [4].</p>
+<p>Cada agente mantiene un vector continuo <i>X<sub>i</sub></i> ∈ [0, 1]<sup><i>n</i></sup>. Para evaluar una solución, las
+dimensiones se ordenan de mayor a menor valor continuo, definiendo el orden explícito de visita a las cajas. Se agregan nodos a
+la ruta en ese orden estricto hasta que la adición de la siguiente caja viole la restricción de tiempo <i>t</i><sub>max</sub>.
+En la Sección IV se presentan variantes de esta decodificación.</p>
+
+<h3>B. Estructura y Pseudocódigo Secuencial</h3>
+<p>El algoritmo secuencial opera iterativamente evaluando el fitness (almas totales), recalculando los pesos protoplasmáticos y
+actualizando las posiciones continuas mediante operaciones de exploración y explotación.</p>
+<div class="algoritmo">
+<p><b>Algoritmo 1:</b> SMA Secuencial para Cajas Deadlock</p>
+<p><b>Entrada:</b> V, S, C, t_max, N_pop, Max_Iter</p>
+<p><b>Salida:</b> Mejor Ruta R_opt, Max Almas Z_max</p>
+<p>1: Inicializar X_i (i = 1..N_pop) en [0,1]^n</p>
+<p>2: <b>mientras</b> iter &lt; Max_Iter <b>hacer</b></p>
+<p>3: &nbsp;<b>para cada</b> agente i <b>hacer</b></p>
+<p>4: &nbsp;&nbsp;R_i ← Decodificar_Ruta(X_i, C, t_max)</p>
+<p>5: &nbsp;&nbsp;Fitness[i] ← Calcular_Almas(R_i, S)</p>
+<p>6: &nbsp;<b>fin para</b></p>
+<p>7: &nbsp;Ordenar población (bF: mejor, wF: peor)</p>
+<p>8: &nbsp;Calcular pesos W_i según Ec. (3)</p>
+<p>9: &nbsp;<b>para cada</b> agente i <b>hacer</b></p>
+<p>10: &nbsp;&nbsp;Actualizar X_i con Ec. (4) y (5)</p>
+<p>11: &nbsp;<b>fin para</b></p>
+<p>12: &nbsp;iter ← iter + 1</p>
+<p>13: <b>fin mientras</b></p>
+<p>14: <b>retornar</b> R_opt, Z_max</p>
+</div>
+
+<h3>C. Benchmark de Validación</h3>
+<p>Antes de la fase de despliegue sobre el mapa final del juego, se tiene contemplado evaluar el algoritmo secuencial con las
+instancias estandarizadas del <i>Team Orienteering Problem</i> de KU Leuven [3] (conjuntos Tsiligirides y Chao) adaptadas a una
+única ruta. La Tabla I resume la equivalencia entre ambos entornos. Los resultados de este documento corresponden a la instancia
+del mapa de <i>Deadlock</i>; la validación con dichas instancias queda como actividad pendiente.</p>
+<div class="tcap">Tabla I<br>Equivalencia de Parámetros de Benchmark</div>
+<table>
+  <tr><th>Parámetro TOP</th><th>Entorno Deadlock</th><th>Rol en SMA</th></tr>
+  <tr><td class="izq">Vértices (<i>n</i>)</td><td class="izq">Ubicación de cajas</td><td class="izq">Dimensión del vector <i>X</i></td></tr>
+  <tr><td class="izq">Puntuación (<i>S<sub>i</sub></i>)</td><td class="izq">Almas por caja</td><td class="izq">Función objetivo</td></tr>
+  <tr><td class="izq"><i>T</i><sub>max</sub></td><td class="izq">Tiempo máximo de ruta</td><td class="izq">Filtro de factibilidad</td></tr>
+  <tr><td class="izq">Origen/Destino</td><td class="izq">Línea o base del jugador</td><td class="izq">Punto fijo <i>V</i><sub>0</sub></td></tr>
+  <tr><td class="izq">Distancia <i>D<sub>ij</sub></i></td><td class="izq">Costo de movimiento</td><td class="izq">Matriz <i>C</i></td></tr>
+</table>
+
+<h2>IV. Implementación</h2>
+<p>El sistema se implementó en Python 3.12 con NumPy. El código fuente y una herramienta de visualización están disponibles
+públicamente [7]. La implementación se organiza en tres módulos: extracción de la instancia, optimización y visualización.</p>
+
+<h3>A. Construcción de la Instancia</h3>
+<p>Las posiciones de los contenedores se obtuvieron de un mapa del juego anotado por el usuario u/Awsmminer de la plataforma
+Reddit [6]. En dicho mapa cada contenedor se indica con un marcador cuadrado de color puro que codifica su tipo (caja o urna) y
+su nivel (superficie, subterráneo o azotea).</p>
+<p>El módulo <code>extraer_nodos.py</code> procesa la imagen de 2000 × 2000 píxeles en cuatro pasos: (i) clasificación de cada
+píxel por distancia euclidiana en el espacio RGB a seis colores de referencia, con una tolerancia de 60 unidades (35 para el
+amarillo, que se confunde con un ícono del mapa); (ii) agrupamiento de los píxeles en componentes 4-conexas; (iii) descarte de
+componentes cuya área está fuera del rango esperado o cuya forma no es rectangular, y (iv) separación de marcadores adyacentes
+mediante una rejilla definida por el lado típico del marcador (13 px). Las coordenadas resultantes se normalizan al intervalo
+[0, 1]. La detección se verificó visualmente superponiendo los centroides sobre la imagen original. La Tabla II resume los
+602 nodos obtenidos y la Fig. 1 muestra su distribución.</p>
+<div class="tcap">Tabla II<br>Contenedores Extraídos por Tipo y Nivel</div>
+<table>
+  <tr><th class="izq">Nivel</th><th>Cajas</th><th>Urnas</th><th>Total</th></tr>
+  <tr><td class="izq">Superficie</td><td>324</td><td>98</td><td>422</td></tr>
+  <tr><td class="izq">Subterráneo</td><td>52</td><td>28</td><td>80</td></tr>
+  <tr><td class="izq">Azotea</td><td>64</td><td>36</td><td>100</td></tr>
+  <tr><th class="izq">Total</th><th>440</th><th>162</th><th>602</th></tr>
+</table>
+<figure>
+  <img src="fig_nodos.png" alt="Mapa con los nodos extraídos">
+  <figcaption>Fig. 1. Contenedores extraídos del mapa anotado [6]. Los cuadros representan cajas y los círculos urnas; el color
+  indica el nivel. El rombo negro marca el punto de inicio y retorno.</figcaption>
+</figure>
+
+<h3>B. Modelo de Tiempos</h3>
+<p>El costo de la arista (<i>i</i>, <i>j</i>) incluye el desplazamiento, el cambio de nivel y el tiempo necesario para romper
+el contenedor de destino:</p>
+<div class="ec"><span>c<sub>ij</sub> = ‖p<sub>i</sub> − p<sub>j</sub>‖ · L · τ / v + δ · |ℓ<sub>i</sub> − ℓ<sub>j</sub>| + β<sub>j</sub></span><span>(6)</span></div>
+<p class="sinsangria">donde <i>p<sub>i</sub></i> son las coordenadas normalizadas, <i>L</i> el ancho del mapa, <i>τ</i> un
+factor de tortuosidad que compensa la presencia de muros, <i>v</i> la velocidad de desplazamiento, <i>ℓ<sub>i</sub></i> ∈
+{0, 1, 2} el nivel (subterráneo, superficie, azotea), <i>δ</i> la penalización por nivel y <i>β<sub>j</sub></i> el tiempo de
+ruptura. La Tabla III lista los valores empleados. Estos parámetros son estimaciones y no mediciones realizadas dentro del juego;
+por ello, los resultados deben interpretarse de manera comparativa entre métodos evaluados bajo el mismo modelo. Los nodos
+para los cuales <i>c</i><sub>0<i>j</i></sub> + <i>c</i><sub><i>j</i>0</sub> &gt; <i>t</i><sub>max</sub> se excluyen antes de
+la búsqueda, ya que no pueden formar parte de ninguna ruta factible.</p>
+<div class="tcap">Tabla III<br>Parámetros del Modelo</div>
+<table>
+  <tr><th class="izq">Parámetro</th><th>Valor</th></tr>
+  <tr><td class="izq">Ancho del mapa <i>L</i></td><td>500 m</td></tr>
+  <tr><td class="izq">Velocidad <i>v</i></td><td>8,0 m/s</td></tr>
+  <tr><td class="izq">Tortuosidad <i>τ</i></td><td>1,3</td></tr>
+  <tr><td class="izq">Penalización por nivel <i>δ</i></td><td>4,0 s</td></tr>
+  <tr><td class="izq">Tiempo de ruptura <i>β</i> (caja / urna)</td><td>1,0 s / 1,5 s</td></tr>
+  <tr><td class="izq">Almas <i>S</i> (caja / urna)</td><td>10 / 15</td></tr>
+  <tr><td class="izq">Punto de inicio y retorno</td><td>Base del equipo</td></tr>
+</table>
+
+<h3>C. Decodificadores</h3>
+<p>Se implementaron cuatro decodificaciones del vector <i>X</i> a una ruta factible. Todas garantizan el cumplimiento de la
+restricción (2), por lo que no se requiere penalización en la función objetivo.</p>
+<ul class="lista">
+  <li><b>Estricto.</b> La regla descrita en la Sección III-A: las cajas se agregan al final de la ruta en orden de llave y el
+  proceso se detiene con la primera que no cabe.</li>
+  <li><b>Salto.</b> Igual que el anterior, pero las cajas que no caben se omiten y se continúa con las siguientes.</li>
+  <li><b>Inserción.</b> Las cajas se consideran en orden de llave; cada una se inserta entre los nodos consecutivos
+  (<i>a</i>, <i>b</i>) que minimizan Δ = <i>c<sub>aj</sub></i> + <i>c<sub>jb</sub></i> − <i>c<sub>ab</sub></i>, siempre que
+  la ruta resultante sea factible.</li>
+  <li><b>Guiado.</b> Construcción voraz en la que, en cada paso, se inserta la caja <i>j</i> que maximiza el valor</li>
+</ul>
+<div class="ec"><span>g<sub>j</sub> = (S<sub>j</sub> / Δ<sub>j</sub>) · exp(γ · (x<sub>j</sub> − 0,5))</span><span>(7)</span></div>
+<p class="sinsangria">donde Δ<sub><i>j</i></sub> es el menor costo de inserción factible de <i>j</i> y <i>γ</i> = 4 limita el
+factor de sesgo al intervalo [<i>e</i><sup>−2</sup>, <i>e</i><sup>2</sup>]. Con <i>x<sub>j</sub></i> = 0,5 para todo
+<i>j</i> se reproduce exactamente la heurística voraz; el SMA aprende qué cajas conviene favorecer o postergar para corregir las
+decisiones miopes de dicha heurística. Esta variante constituye una hibridación integrativa entre la metaheurística y una
+heurística constructiva. Su costo por evaluación es <i>O</i>(<i>k</i><sup>2</sup><i>n</i>), con <i>k</i> el número de cajas de
+la ruta, frente a <i>O</i>(<i>n</i> log <i>n</i>) del decodificador estricto.</p>
+
+<h3>D. Adaptación del SMA</h3>
+<p>Dado que el problema es de maximización y las almas no están acotadas en [0, 1], se realizaron los siguientes ajustes:
+(i) la población se ordena de mayor a menor fitness, de modo que el cociente de la Ec. (3) vale 0 para el mejor agente y 1
+para el peor; (ii) la probabilidad de la Ec. (5) se normaliza como <i>p</i> = tanh(|<i>S</i>(<i>i</i>) − <i>DF</i>| / |<i>DF</i>|),
+pues sin normalización tomaría el valor 1 para casi todos los agentes; (iii) se emplea <i>a</i> = arctanh(1 − (<i>t</i> + 1) /
+(<i>T</i> + 1)) para evitar el valor infinito en la primera iteración; (iv) tras cada actualización las posiciones se recortan al
+intervalo [0, 1], y (v) <i>X<sub>b</sub></i> corresponde a la mejor posición global. Con el decodificador guiado, un agente se
+inicializa con <i>x<sub>j</sub></i> = 0,5, de modo que la solución voraz forma parte de la población inicial.</p>
+
+<h3>E. Línea Base Voraz</h3>
+<p>Como referencia se implementó una heurística de inserción voraz que, mientras exista una caja factible, inserta aquella con
+mayor cociente <i>S<sub>j</sub></i> / Δ<sub><i>j</i></sub> en su posición de menor costo. Es determinista y se ejecuta en
+milisegundos.</p>
+
+<h3>F. Evaluación Paralela de la Población</h3>
+<p>La decodificación concentra la mayor parte del costo por iteración: con el decodificador guiado cada agente requiere
+<i>O</i>(<i>k</i><sup>2</sup><i>n</i>) operaciones, mientras que la actualización de posiciones es una operación vectorizada de
+<i>O</i>(<i>Nn</i>). Como la decodificación de cada agente es independiente,
+la función <code>evaluar_poblacion</code> se paraleliza directamente con un conjunto de procesos (<code>multiprocessing.Pool</code>):
+la instancia se copia una sola vez a cada proceso al crearlo y en cada iteración solo se transmiten los vectores <i>X<sub>i</sub></i>
+y las rutas resultantes. La actualización del SMA permanece secuencial. Esta versión constituye un primer paso hacia las
+implementaciones en memoria compartida y GPU descritas en la Sección VIII.</p>
+
+<h3>G. Herramienta de Visualización</h3>
+<p>Se desarrolló un visor web que muestra la ruta sobre el mapa, la curva de convergencia y la evolución de la mejor ruta
+iteración por iteración, con interfaz en español e inglés. Está disponible en
+<code>bistraw.github.io/-SoulPath-Crate-farming-routes-for-Deadlock</code>.</p>
+
+<h2>V. Diseño Experimental</h2>
+<p>Los experimentos se ejecutaron en un equipo con procesador Intel Core i7-7700HQ a 2,80 GHz (4 núcleos físicos, 8 hilos), 32 GB de RAM, Windows 10, Python
+3.12.10 y NumPy 2.5.3. Se utilizó una población de <i>N</i> = 30 agentes, <i>T</i> = 100 iteraciones y
+<i>z</i> = 0,03. Cada configuración se repitió 10 veces con semillas 0 a 9; se reportan la media, la desviación
+estándar muestral, el mejor y el peor valor. Salvo en el experimento de escalamiento, la población se evaluó con 4 procesos.
+Se realizaron tres experimentos: (i) comparación de los cuatro decodificadores con <i>t</i><sub>max</sub> = 90 s; (ii) desempeño
+del decodificador guiado frente a la heurística voraz con <i>t</i><sub>max</sub> ∈ {45, 90, 150} s, y (iii) tiempo de cómputo
+con 1, 2, 4 y 8 procesos (<i>t</i><sub>max</sub> = 90 s, 30 iteraciones, tres semillas). El experimento completo se reproduce con
+<code>python experimentos.py</code>.</p>
+
+<h2>VI. Resultados</h2>
+<h3>A. Comparación de Decodificadores</h3>
+<p>La Tabla IV presenta los resultados con <i>t</i><sub>max</sub> = 90 s. El decodificador estricto, que corresponde a la regla planteada originalmente, obtuvo 75,5 almas en promedio, equivalente al 32,1 % de la solución voraz. Omitir las cajas que no caben (salto) elevó el promedio a 120,0 almas, y la inserción por costo mínimo a 157,0; sin embargo, ninguna de estas tres variantes alcanzó a la heurística voraz (235 almas). El decodificador guiado obtuvo 270,0 ± 8,2 almas, 14,9 % por encima de la referencia, y superó a la solución voraz en 10 de las 10 repeticiones.</p>
+<div class="tcap">Tabla IV<br>Comparación de Decodificadores (<i>t</i><sub>max</sub> = 90 s, 10 repeticiones)</div>
+<table>
+  <tr><th class="izq">Decodificador</th><th>Almas media ± desv.</th><th>Mejor</th><th>Peor</th><th>Cajas</th><th>Cómputo (s)</th></tr>
+  <tr><td class="izq">Estricto (III-A)</td><td>75,5 ± 10,7</td><td>90</td><td>50</td><td>6,2</td><td>0,9</td></tr>
+  <tr><td class="izq">Salto</td><td>120,0 ± 7,8</td><td>135</td><td>110</td><td>10,0</td><td>1,4</td></tr>
+  <tr><td class="izq">Inserción</td><td>157,0 ± 20,2</td><td>200</td><td>135</td><td>13,7</td><td>10,6</td></tr>
+  <tr><td class="izq">Guiado (propuesto)</td><td>270,0 ± 8,2</td><td>275</td><td>250</td><td>23,6</td><td>34,8</td></tr>
+  <tr><td class="izq">Voraz (referencia)</td><td>235</td><td>—</td><td>—</td><td>21</td><td>&lt; 0,1</td></tr>
+</table>
+<p>La mejora en calidad tiene un costo: cada corrida del decodificador guiado requirió en promedio 34,8 s, frente a 0,9 s del estricto, debido a la complejidad de la construcción voraz descrita en la Sección IV-C.</p>
+
+<h3>B. Desempeño Según el Presupuesto de Tiempo</h3>
+<p>La Tabla V compara el decodificador guiado con la heurística voraz para distintos presupuestos. El SMA guiado mejoró en promedio a la heurística voraz en todos los casos: 27,3 % con 45 s, 14,9 % con 90 s y 15,2 % con 150 s. El tiempo de cómputo crece con el presupuesto, pues las rutas contienen más cajas y el costo de cada decodificación aumenta de forma cuadrática con su longitud.</p>
+<div class="tcap">Tabla V<br>SMA Guiado Frente a la Heurística Voraz</div>
+<table>
+  <tr><th><i>t</i><sub>max</sub> (s)</th><th>Voraz</th><th>SMA media ± desv.</th><th>SMA mejor</th><th>Mejora media</th><th>Cómputo (s)</th></tr>
+  <tr><td>45</td><td>55</td><td>70,0 ± 0,0</td><td>70</td><td>+27,3 %</td><td>1,5</td></tr>
+  <tr><td>90</td><td>235</td><td>270,0 ± 8,2</td><td>275</td><td>+14,9 %</td><td>34,8</td></tr>
+  <tr><td>150</td><td>450</td><td>518,5 ± 35,8</td><td>555</td><td>+15,2 %</td><td>110,9</td></tr>
+</table>
+
+<h3>C. Convergencia</h3>
+<p>La Fig. 2 muestra la evolución del mejor valor global. Los decodificadores basados únicamente en llaves aleatorias mejoran de forma gradual, pero permanecen por debajo de la referencia voraz durante las 100 iteraciones. El decodificador guiado inicia en el valor voraz, gracias al agente inicializado en 0,5, y alcanza un promedio de 266,0 almas en la iteración 25 y 270,0 al final. En promedio, su mejor solución se encontró en la iteración 23,3, aunque con una dispersión amplia (de la iteración 1 a la 96); dado que algunas repeticiones mejoraron cerca del final, no puede descartarse que un mayor número de iteraciones produzca mejoras adicionales.</p>
+<figure>
+  <img src="fig_convergencia.svg" alt="Curvas de convergencia">
+  <figcaption>Fig. 2. Mejor valor global por iteración, promediado sobre 10 repeticiones, para cada decodificador
+  (<i>t</i><sub>max</sub> = 90 s). La línea discontinua indica la solución voraz.</figcaption>
+</figure>
+
+<h3>D. Rutas Obtenidas</h3>
+<p>La Fig. 3 compara la ruta voraz (235 almas, 21 contenedores, 84,6 s) con la obtenida por el SMA guiado con la semilla 0 (265 almas, 23 contenedores, 89,0 s). La heurística voraz se dirige al grupo de cajas más próximo a la base, al noroeste, porque es el que ofrece el mejor cociente inmediato. El SMA, en cambio, selecciona un grupo situado al norte y noreste, cuyo acceso requiere un desplazamiento inicial mayor, pero que concentra más contenedores en poco espacio. Este comportamiento ilustra la limitación miope de la construcción voraz que el sesgo aprendido por el SMA permite corregir.</p>
+<figure>
+  <img src="fig_rutas.png" alt="Rutas voraz y SMA">
+  <figcaption>Fig. 3. Ruta voraz (naranja) y ruta del SMA guiado (verde) para <i>t</i><sub>max</sub> = 90 s, semilla 0. Se
+  muestra la región del mapa cercana a la base; los contenedores visitados se resaltan con el color de su nivel.</figcaption>
+</figure>
+
+<h3>E. Tiempo de Cómputo y Paralelización</h3>
+<p>La Tabla VI reporta el tiempo de 30 iteraciones del SMA guiado. Con 2 procesos la aceleración fue de 1,48 y con 4 procesos de 2,11, lo que equivale a una eficiencia de 52,8 %. Con 8 procesos la aceleración aumentó a 2,92, pese a que el procesador cuenta con 4 núcleos físicos; los 4 hilos adicionales que ofrece la tecnología Hyper-Threading aprovechan los periodos en que un núcleo espera datos de memoria, aunque con una eficiencia por proceso menor (36,5 %). La eficiencia por debajo del ideal se explica por la sobrecarga de serializar los vectores y las rutas entre procesos en cada iteración, por la actualización del SMA, que permanece secuencial, y por el desbalance de carga, ya que los agentes con rutas más largas tardan más en decodificarse. La desviación estándar del caso secuencial (3,30 s) se debe a que cada semilla produce rutas de distinta longitud. Estos resultados justifican la exploración de esquemas de memoria compartida en la siguiente etapa.</p>
+<div class="tcap">Tabla VI<br>Tiempo de Cómputo Según el Número de Procesos</div>
+<table>
+  <tr><th>Procesos</th><th>Tiempo (s)</th><th>Aceleración</th><th>Eficiencia</th></tr>
+  <tr><td>1</td><td>19,29 ± 3,30</td><td>1,00</td><td>100,0 %</td></tr>
+  <tr><td>2</td><td>13,05 ± 2,01</td><td>1,48</td><td>73,9 %</td></tr>
+  <tr><td>4</td><td>9,14 ± 0,71</td><td>2,11</td><td>52,8 %</td></tr>
+  <tr><td>8</td><td>6,60 ± 0,80</td><td>2,92</td><td>36,5 %</td></tr>
+</table>
+
+<h2>VII. Discusión</h2>
+<p>Los resultados muestran que la representación por llaves aleatorias, aplicada de forma directa, resulta insuficiente para
+una instancia de este tamaño: con 602 nodos, las primeras posiciones de una permutación aleatoria corresponden a cajas
+dispersas por todo el mapa, y el presupuesto se agota en desplazamientos. La inserción por costo mínimo corrige el orden de
+visita, pero no la selección de cajas. El decodificador guiado conserva la representación continua del SMA y la combina con
+información del problema, lo que le permite partir de una solución competitiva y mejorarla.</p>
+<p>Deben señalarse las siguientes limitaciones. Primero, la distancia euclidiana corregida por un factor constante no reproduce
+los recorridos reales, que dependen de muros, escaleras y tirolesas. Segundo, los parámetros de la Tabla III son estimaciones;
+la magnitud absoluta de las almas obtenidas depende de ellos, aunque la comparación entre métodos se realiza bajo el mismo
+modelo. Tercero, el juego asigna recompensas variables a los contenedores y estos reaparecen con el tiempo, aspectos que el
+modelo estático no considera. Finalmente, la validación con instancias de referencia del TOP aún no se ha realizado.</p>
+
+<h2>VIII. Conclusiones y Trabajo Futuro</h2>
+<p>Se implementó el SMA secuencial para el problema de recolección de cajas en <i>Deadlock</i>, junto con un procedimiento
+automático para construir la instancia a partir de un mapa anotado por la comunidad. La decodificación directa de llaves aleatorias resultó inadecuada para una instancia de 602 nodos, con un desempeño inferior al de una heurística voraz simple. El decodificador guiado, que integra el SMA con dicha heurística, superó a la referencia en promedio entre 14,9 % y 27,3 % según el presupuesto de tiempo. La evaluación paralela de la población con procesos obtuvo una aceleración de 2,11 con cuatro procesos.</p>
+<p>Esta implementación establece la línea base secuencial verificada. En la siguiente etapa del proyecto servirá de punto de
+comparación para versiones paralelas en arquitecturas de memoria compartida (OpenMP / multihilo), donde se espera reducir la
+sobrecarga de comunicación observada con procesos, y para la aceleración por GPU del cálculo de costos de inserción, orientadas
+a la evaluación en tiempo real durante partidas activas. También se contempla calibrar el modelo de tiempos con mediciones en el
+juego, sustituir la distancia euclidiana por distancias sobre la malla de navegación del mapa y completar la validación con las
+instancias de KU Leuven.</p>
+
+<h2>Agradecimientos</h2>
+<p class="sinsangria">Los autores agradecen al usuario u/Awsmminer por elaborar y compartir el mapa con la ubicación de las
+cajas y urnas de <i>Deadlock</i>, sin el cual no habría sido posible construir la instancia del problema.</p>
+
+<h2>Referencias</h2>
+<ol class="refs">
+  <li>S. Li, H. Chen, M. Wang, A. A. Heidari, and S. Mirjalili, “Slime mould algorithm: A new method for stochastic
+  optimization,” <i>Future Generation Computer Systems</i>, vol. 111, pp. 300–323, 2020.</li>
+  <li>I. Chao, B. Golden, and E. Wasil, “The team orienteering problem,” <i>European Journal of Operational Research</i>,
+  vol. 88, no. 3, pp. 464–474, 1996.</li>
+  <li>KU Leuven, “The Orienteering Problem: Test Instances,” Division of Industrial Management, 2024. [Online]. Available:
+  https://www.mech.kuleuven.be/en/mim/op</li>
+  <li>J. C. Bean, “Genetics and random keys for sequencing and optimization,” <i>ORSA Journal on Computing</i>, vol. 6, no. 2,
+  pp. 154–160, 1994.</li>
+  <li>P. Vansteenwegen, W. Souffriau, and D. Van Oudheusden, “The orienteering problem: A survey,” <i>European Journal of
+  Operational Research</i>, vol. 209, no. 1, pp. 1–10, 2011.</li>
+  <li>u/Awsmminer, “Mapa de cajas y urnas de Deadlock (superficie, subterráneo y azoteas),” Reddit, 2026.</li>
+  <li>M. F. Barrón Álvarez, L. M. Benítez Marín, and L. Merino Garfias, “SoulPath: Crate-farming routes for Deadlock,”
+  repositorio de código, 2026. [Online]. Available: https://github.com/Bistraw/-SoulPath-Crate-farming-routes-for-Deadlock</li>
+</ol>
+
+</div>
+</body>
+</html>
